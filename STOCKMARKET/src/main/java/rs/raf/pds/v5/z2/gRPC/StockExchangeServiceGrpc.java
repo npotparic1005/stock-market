@@ -1,0 +1,568 @@
+package rs.raf.pds.v5.z2.gRPC;
+
+import static io.grpc.MethodDescriptor.generateFullMethodName;
+
+/**
+ */
+@javax.annotation.Generated(
+    value = "by gRPC proto compiler (version 1.54.0)",
+    comments = "Source: student_service.proto")
+@io.grpc.stub.annotations.GrpcGenerated
+public final class StockExchangeServiceGrpc {
+
+  private StockExchangeServiceGrpc() {}
+
+  public static final String SERVICE_NAME = "StockExchangeService";
+
+  // Static method descriptors that strictly reflect the proto.
+  private static volatile io.grpc.MethodDescriptor<rs.raf.pds.v5.z2.gRPC.StockRequest,
+      rs.raf.pds.v5.z2.gRPC.StockData> getGetStockDataMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetStockData",
+      requestType = rs.raf.pds.v5.z2.gRPC.StockRequest.class,
+      responseType = rs.raf.pds.v5.z2.gRPC.StockData.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<rs.raf.pds.v5.z2.gRPC.StockRequest,
+      rs.raf.pds.v5.z2.gRPC.StockData> getGetStockDataMethod() {
+    io.grpc.MethodDescriptor<rs.raf.pds.v5.z2.gRPC.StockRequest, rs.raf.pds.v5.z2.gRPC.StockData> getGetStockDataMethod;
+    if ((getGetStockDataMethod = StockExchangeServiceGrpc.getGetStockDataMethod) == null) {
+      synchronized (StockExchangeServiceGrpc.class) {
+        if ((getGetStockDataMethod = StockExchangeServiceGrpc.getGetStockDataMethod) == null) {
+          StockExchangeServiceGrpc.getGetStockDataMethod = getGetStockDataMethod =
+              io.grpc.MethodDescriptor.<rs.raf.pds.v5.z2.gRPC.StockRequest, rs.raf.pds.v5.z2.gRPC.StockData>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetStockData"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  rs.raf.pds.v5.z2.gRPC.StockRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  rs.raf.pds.v5.z2.gRPC.StockData.getDefaultInstance()))
+              .setSchemaDescriptor(new StockExchangeServiceMethodDescriptorSupplier("GetStockData"))
+              .build();
+        }
+      }
+    }
+    return getGetStockDataMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<rs.raf.pds.v5.z2.gRPC.EmptyMessage,
+      rs.raf.pds.v5.z2.gRPC.StockData> getGetAllStockDataMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetAllStockData",
+      requestType = rs.raf.pds.v5.z2.gRPC.EmptyMessage.class,
+      responseType = rs.raf.pds.v5.z2.gRPC.StockData.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<rs.raf.pds.v5.z2.gRPC.EmptyMessage,
+      rs.raf.pds.v5.z2.gRPC.StockData> getGetAllStockDataMethod() {
+    io.grpc.MethodDescriptor<rs.raf.pds.v5.z2.gRPC.EmptyMessage, rs.raf.pds.v5.z2.gRPC.StockData> getGetAllStockDataMethod;
+    if ((getGetAllStockDataMethod = StockExchangeServiceGrpc.getGetAllStockDataMethod) == null) {
+      synchronized (StockExchangeServiceGrpc.class) {
+        if ((getGetAllStockDataMethod = StockExchangeServiceGrpc.getGetAllStockDataMethod) == null) {
+          StockExchangeServiceGrpc.getGetAllStockDataMethod = getGetAllStockDataMethod =
+              io.grpc.MethodDescriptor.<rs.raf.pds.v5.z2.gRPC.EmptyMessage, rs.raf.pds.v5.z2.gRPC.StockData>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetAllStockData"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  rs.raf.pds.v5.z2.gRPC.EmptyMessage.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  rs.raf.pds.v5.z2.gRPC.StockData.getDefaultInstance()))
+              .setSchemaDescriptor(new StockExchangeServiceMethodDescriptorSupplier("GetAllStockData"))
+              .build();
+        }
+      }
+    }
+    return getGetAllStockDataMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<rs.raf.pds.v5.z2.gRPC.AskRequest,
+      rs.raf.pds.v5.z2.gRPC.StockData> getGetAskOffersMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetAskOffers",
+      requestType = rs.raf.pds.v5.z2.gRPC.AskRequest.class,
+      responseType = rs.raf.pds.v5.z2.gRPC.StockData.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<rs.raf.pds.v5.z2.gRPC.AskRequest,
+      rs.raf.pds.v5.z2.gRPC.StockData> getGetAskOffersMethod() {
+    io.grpc.MethodDescriptor<rs.raf.pds.v5.z2.gRPC.AskRequest, rs.raf.pds.v5.z2.gRPC.StockData> getGetAskOffersMethod;
+    if ((getGetAskOffersMethod = StockExchangeServiceGrpc.getGetAskOffersMethod) == null) {
+      synchronized (StockExchangeServiceGrpc.class) {
+        if ((getGetAskOffersMethod = StockExchangeServiceGrpc.getGetAskOffersMethod) == null) {
+          StockExchangeServiceGrpc.getGetAskOffersMethod = getGetAskOffersMethod =
+              io.grpc.MethodDescriptor.<rs.raf.pds.v5.z2.gRPC.AskRequest, rs.raf.pds.v5.z2.gRPC.StockData>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetAskOffers"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  rs.raf.pds.v5.z2.gRPC.AskRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  rs.raf.pds.v5.z2.gRPC.StockData.getDefaultInstance()))
+              .setSchemaDescriptor(new StockExchangeServiceMethodDescriptorSupplier("GetAskOffers"))
+              .build();
+        }
+      }
+    }
+    return getGetAskOffersMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<rs.raf.pds.v5.z2.gRPC.BidRequest,
+      rs.raf.pds.v5.z2.gRPC.StockData> getGetBidOffersMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetBidOffers",
+      requestType = rs.raf.pds.v5.z2.gRPC.BidRequest.class,
+      responseType = rs.raf.pds.v5.z2.gRPC.StockData.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<rs.raf.pds.v5.z2.gRPC.BidRequest,
+      rs.raf.pds.v5.z2.gRPC.StockData> getGetBidOffersMethod() {
+    io.grpc.MethodDescriptor<rs.raf.pds.v5.z2.gRPC.BidRequest, rs.raf.pds.v5.z2.gRPC.StockData> getGetBidOffersMethod;
+    if ((getGetBidOffersMethod = StockExchangeServiceGrpc.getGetBidOffersMethod) == null) {
+      synchronized (StockExchangeServiceGrpc.class) {
+        if ((getGetBidOffersMethod = StockExchangeServiceGrpc.getGetBidOffersMethod) == null) {
+          StockExchangeServiceGrpc.getGetBidOffersMethod = getGetBidOffersMethod =
+              io.grpc.MethodDescriptor.<rs.raf.pds.v5.z2.gRPC.BidRequest, rs.raf.pds.v5.z2.gRPC.StockData>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetBidOffers"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  rs.raf.pds.v5.z2.gRPC.BidRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  rs.raf.pds.v5.z2.gRPC.StockData.getDefaultInstance()))
+              .setSchemaDescriptor(new StockExchangeServiceMethodDescriptorSupplier("GetBidOffers"))
+              .build();
+        }
+      }
+    }
+    return getGetBidOffersMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<rs.raf.pds.v5.z2.gRPC.Order,
+      rs.raf.pds.v5.z2.gRPC.EmptyMessage> getPlaceOrderMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "PlaceOrder",
+      requestType = rs.raf.pds.v5.z2.gRPC.Order.class,
+      responseType = rs.raf.pds.v5.z2.gRPC.EmptyMessage.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<rs.raf.pds.v5.z2.gRPC.Order,
+      rs.raf.pds.v5.z2.gRPC.EmptyMessage> getPlaceOrderMethod() {
+    io.grpc.MethodDescriptor<rs.raf.pds.v5.z2.gRPC.Order, rs.raf.pds.v5.z2.gRPC.EmptyMessage> getPlaceOrderMethod;
+    if ((getPlaceOrderMethod = StockExchangeServiceGrpc.getPlaceOrderMethod) == null) {
+      synchronized (StockExchangeServiceGrpc.class) {
+        if ((getPlaceOrderMethod = StockExchangeServiceGrpc.getPlaceOrderMethod) == null) {
+          StockExchangeServiceGrpc.getPlaceOrderMethod = getPlaceOrderMethod =
+              io.grpc.MethodDescriptor.<rs.raf.pds.v5.z2.gRPC.Order, rs.raf.pds.v5.z2.gRPC.EmptyMessage>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "PlaceOrder"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  rs.raf.pds.v5.z2.gRPC.Order.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  rs.raf.pds.v5.z2.gRPC.EmptyMessage.getDefaultInstance()))
+              .setSchemaDescriptor(new StockExchangeServiceMethodDescriptorSupplier("PlaceOrder"))
+              .build();
+        }
+      }
+    }
+    return getPlaceOrderMethod;
+  }
+
+  /**
+   * Creates a new async stub that supports all call types for the service
+   */
+  public static StockExchangeServiceStub newStub(io.grpc.Channel channel) {
+    io.grpc.stub.AbstractStub.StubFactory<StockExchangeServiceStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<StockExchangeServiceStub>() {
+        @java.lang.Override
+        public StockExchangeServiceStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new StockExchangeServiceStub(channel, callOptions);
+        }
+      };
+    return StockExchangeServiceStub.newStub(factory, channel);
+  }
+
+  /**
+   * Creates a new blocking-style stub that supports unary and streaming output calls on the service
+   */
+  public static StockExchangeServiceBlockingStub newBlockingStub(
+      io.grpc.Channel channel) {
+    io.grpc.stub.AbstractStub.StubFactory<StockExchangeServiceBlockingStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<StockExchangeServiceBlockingStub>() {
+        @java.lang.Override
+        public StockExchangeServiceBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new StockExchangeServiceBlockingStub(channel, callOptions);
+        }
+      };
+    return StockExchangeServiceBlockingStub.newStub(factory, channel);
+  }
+
+  /**
+   * Creates a new ListenableFuture-style stub that supports unary calls on the service
+   */
+  public static StockExchangeServiceFutureStub newFutureStub(
+      io.grpc.Channel channel) {
+    io.grpc.stub.AbstractStub.StubFactory<StockExchangeServiceFutureStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<StockExchangeServiceFutureStub>() {
+        @java.lang.Override
+        public StockExchangeServiceFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new StockExchangeServiceFutureStub(channel, callOptions);
+        }
+      };
+    return StockExchangeServiceFutureStub.newStub(factory, channel);
+  }
+
+  /**
+   */
+  public interface AsyncService {
+
+    /**
+     */
+    default void getStockData(rs.raf.pds.v5.z2.gRPC.StockRequest request,
+        io.grpc.stub.StreamObserver<rs.raf.pds.v5.z2.gRPC.StockData> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetStockDataMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void getAllStockData(rs.raf.pds.v5.z2.gRPC.EmptyMessage request,
+        io.grpc.stub.StreamObserver<rs.raf.pds.v5.z2.gRPC.StockData> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAllStockDataMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void getAskOffers(rs.raf.pds.v5.z2.gRPC.AskRequest request,
+        io.grpc.stub.StreamObserver<rs.raf.pds.v5.z2.gRPC.StockData> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAskOffersMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void getBidOffers(rs.raf.pds.v5.z2.gRPC.BidRequest request,
+        io.grpc.stub.StreamObserver<rs.raf.pds.v5.z2.gRPC.StockData> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetBidOffersMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void placeOrder(rs.raf.pds.v5.z2.gRPC.Order request,
+        io.grpc.stub.StreamObserver<rs.raf.pds.v5.z2.gRPC.EmptyMessage> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getPlaceOrderMethod(), responseObserver);
+    }
+  }
+
+  /**
+   * Base class for the server implementation of the service StockExchangeService.
+   */
+  public static abstract class StockExchangeServiceImplBase
+      implements io.grpc.BindableService, AsyncService {
+
+    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
+      return StockExchangeServiceGrpc.bindService(this);
+    }
+  }
+
+  /**
+   * A stub to allow clients to do asynchronous rpc calls to service StockExchangeService.
+   */
+  public static final class StockExchangeServiceStub
+      extends io.grpc.stub.AbstractAsyncStub<StockExchangeServiceStub> {
+    private StockExchangeServiceStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      super(channel, callOptions);
+    }
+
+    @java.lang.Override
+    protected StockExchangeServiceStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      return new StockExchangeServiceStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public void getStockData(rs.raf.pds.v5.z2.gRPC.StockRequest request,
+        io.grpc.stub.StreamObserver<rs.raf.pds.v5.z2.gRPC.StockData> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetStockDataMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getAllStockData(rs.raf.pds.v5.z2.gRPC.EmptyMessage request,
+        io.grpc.stub.StreamObserver<rs.raf.pds.v5.z2.gRPC.StockData> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getGetAllStockDataMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getAskOffers(rs.raf.pds.v5.z2.gRPC.AskRequest request,
+        io.grpc.stub.StreamObserver<rs.raf.pds.v5.z2.gRPC.StockData> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getGetAskOffersMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getBidOffers(rs.raf.pds.v5.z2.gRPC.BidRequest request,
+        io.grpc.stub.StreamObserver<rs.raf.pds.v5.z2.gRPC.StockData> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getGetBidOffersMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void placeOrder(rs.raf.pds.v5.z2.gRPC.Order request,
+        io.grpc.stub.StreamObserver<rs.raf.pds.v5.z2.gRPC.EmptyMessage> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getPlaceOrderMethod(), getCallOptions()), request, responseObserver);
+    }
+  }
+
+  /**
+   * A stub to allow clients to do synchronous rpc calls to service StockExchangeService.
+   */
+  public static final class StockExchangeServiceBlockingStub
+      extends io.grpc.stub.AbstractBlockingStub<StockExchangeServiceBlockingStub> {
+    private StockExchangeServiceBlockingStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      super(channel, callOptions);
+    }
+
+    @java.lang.Override
+    protected StockExchangeServiceBlockingStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      return new StockExchangeServiceBlockingStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public rs.raf.pds.v5.z2.gRPC.StockData getStockData(rs.raf.pds.v5.z2.gRPC.StockRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetStockDataMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<rs.raf.pds.v5.z2.gRPC.StockData> getAllStockData(
+        rs.raf.pds.v5.z2.gRPC.EmptyMessage request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getGetAllStockDataMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<rs.raf.pds.v5.z2.gRPC.StockData> getAskOffers(
+        rs.raf.pds.v5.z2.gRPC.AskRequest request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getGetAskOffersMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<rs.raf.pds.v5.z2.gRPC.StockData> getBidOffers(
+        rs.raf.pds.v5.z2.gRPC.BidRequest request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getGetBidOffersMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public rs.raf.pds.v5.z2.gRPC.EmptyMessage placeOrder(rs.raf.pds.v5.z2.gRPC.Order request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getPlaceOrderMethod(), getCallOptions(), request);
+    }
+  }
+
+  /**
+   * A stub to allow clients to do ListenableFuture-style rpc calls to service StockExchangeService.
+   */
+  public static final class StockExchangeServiceFutureStub
+      extends io.grpc.stub.AbstractFutureStub<StockExchangeServiceFutureStub> {
+    private StockExchangeServiceFutureStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      super(channel, callOptions);
+    }
+
+    @java.lang.Override
+    protected StockExchangeServiceFutureStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+      return new StockExchangeServiceFutureStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<rs.raf.pds.v5.z2.gRPC.StockData> getStockData(
+        rs.raf.pds.v5.z2.gRPC.StockRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetStockDataMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<rs.raf.pds.v5.z2.gRPC.EmptyMessage> placeOrder(
+        rs.raf.pds.v5.z2.gRPC.Order request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getPlaceOrderMethod(), getCallOptions()), request);
+    }
+  }
+
+  private static final int METHODID_GET_STOCK_DATA = 0;
+  private static final int METHODID_GET_ALL_STOCK_DATA = 1;
+  private static final int METHODID_GET_ASK_OFFERS = 2;
+  private static final int METHODID_GET_BID_OFFERS = 3;
+  private static final int METHODID_PLACE_ORDER = 4;
+
+  private static final class MethodHandlers<Req, Resp> implements
+      io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
+      io.grpc.stub.ServerCalls.ServerStreamingMethod<Req, Resp>,
+      io.grpc.stub.ServerCalls.ClientStreamingMethod<Req, Resp>,
+      io.grpc.stub.ServerCalls.BidiStreamingMethod<Req, Resp> {
+    private final AsyncService serviceImpl;
+    private final int methodId;
+
+    MethodHandlers(AsyncService serviceImpl, int methodId) {
+      this.serviceImpl = serviceImpl;
+      this.methodId = methodId;
+    }
+
+    @java.lang.Override
+    @java.lang.SuppressWarnings("unchecked")
+    public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
+      switch (methodId) {
+        case METHODID_GET_STOCK_DATA:
+          serviceImpl.getStockData((rs.raf.pds.v5.z2.gRPC.StockRequest) request,
+              (io.grpc.stub.StreamObserver<rs.raf.pds.v5.z2.gRPC.StockData>) responseObserver);
+          break;
+        case METHODID_GET_ALL_STOCK_DATA:
+          serviceImpl.getAllStockData((rs.raf.pds.v5.z2.gRPC.EmptyMessage) request,
+              (io.grpc.stub.StreamObserver<rs.raf.pds.v5.z2.gRPC.StockData>) responseObserver);
+          break;
+        case METHODID_GET_ASK_OFFERS:
+          serviceImpl.getAskOffers((rs.raf.pds.v5.z2.gRPC.AskRequest) request,
+              (io.grpc.stub.StreamObserver<rs.raf.pds.v5.z2.gRPC.StockData>) responseObserver);
+          break;
+        case METHODID_GET_BID_OFFERS:
+          serviceImpl.getBidOffers((rs.raf.pds.v5.z2.gRPC.BidRequest) request,
+              (io.grpc.stub.StreamObserver<rs.raf.pds.v5.z2.gRPC.StockData>) responseObserver);
+          break;
+        case METHODID_PLACE_ORDER:
+          serviceImpl.placeOrder((rs.raf.pds.v5.z2.gRPC.Order) request,
+              (io.grpc.stub.StreamObserver<rs.raf.pds.v5.z2.gRPC.EmptyMessage>) responseObserver);
+          break;
+        default:
+          throw new AssertionError();
+      }
+    }
+
+    @java.lang.Override
+    @java.lang.SuppressWarnings("unchecked")
+    public io.grpc.stub.StreamObserver<Req> invoke(
+        io.grpc.stub.StreamObserver<Resp> responseObserver) {
+      switch (methodId) {
+        default:
+          throw new AssertionError();
+      }
+    }
+  }
+
+  public static final io.grpc.ServerServiceDefinition bindService(AsyncService service) {
+    return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
+        .addMethod(
+          getGetStockDataMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              rs.raf.pds.v5.z2.gRPC.StockRequest,
+              rs.raf.pds.v5.z2.gRPC.StockData>(
+                service, METHODID_GET_STOCK_DATA)))
+        .addMethod(
+          getGetAllStockDataMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              rs.raf.pds.v5.z2.gRPC.EmptyMessage,
+              rs.raf.pds.v5.z2.gRPC.StockData>(
+                service, METHODID_GET_ALL_STOCK_DATA)))
+        .addMethod(
+          getGetAskOffersMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              rs.raf.pds.v5.z2.gRPC.AskRequest,
+              rs.raf.pds.v5.z2.gRPC.StockData>(
+                service, METHODID_GET_ASK_OFFERS)))
+        .addMethod(
+          getGetBidOffersMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              rs.raf.pds.v5.z2.gRPC.BidRequest,
+              rs.raf.pds.v5.z2.gRPC.StockData>(
+                service, METHODID_GET_BID_OFFERS)))
+        .addMethod(
+          getPlaceOrderMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              rs.raf.pds.v5.z2.gRPC.Order,
+              rs.raf.pds.v5.z2.gRPC.EmptyMessage>(
+                service, METHODID_PLACE_ORDER)))
+        .build();
+  }
+
+  private static abstract class StockExchangeServiceBaseDescriptorSupplier
+      implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
+    StockExchangeServiceBaseDescriptorSupplier() {}
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
+      return rs.raf.pds.v5.z2.gRPC.StudentService.getDescriptor();
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
+      return getFileDescriptor().findServiceByName("StockExchangeService");
+    }
+  }
+
+  private static final class StockExchangeServiceFileDescriptorSupplier
+      extends StockExchangeServiceBaseDescriptorSupplier {
+    StockExchangeServiceFileDescriptorSupplier() {}
+  }
+
+  private static final class StockExchangeServiceMethodDescriptorSupplier
+      extends StockExchangeServiceBaseDescriptorSupplier
+      implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
+    private final String methodName;
+
+    StockExchangeServiceMethodDescriptorSupplier(String methodName) {
+      this.methodName = methodName;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.MethodDescriptor getMethodDescriptor() {
+      return getServiceDescriptor().findMethodByName(methodName);
+    }
+  }
+
+  private static volatile io.grpc.ServiceDescriptor serviceDescriptor;
+
+  public static io.grpc.ServiceDescriptor getServiceDescriptor() {
+    io.grpc.ServiceDescriptor result = serviceDescriptor;
+    if (result == null) {
+      synchronized (StockExchangeServiceGrpc.class) {
+        result = serviceDescriptor;
+        if (result == null) {
+          serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
+              .setSchemaDescriptor(new StockExchangeServiceFileDescriptorSupplier())
+              .addMethod(getGetStockDataMethod())
+              .addMethod(getGetAllStockDataMethod())
+              .addMethod(getGetAskOffersMethod())
+              .addMethod(getGetBidOffersMethod())
+              .addMethod(getPlaceOrderMethod())
+              .build();
+        }
+      }
+    }
+    return result;
+  }
+}

@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option java_package = "rs.raf.pds.v5.z2.gRPC";
+
+message EmptyMessage {}
+service StockExchangeService {
+
+	rpc GetStockData(StockRequest) returns (StockData) {}
+	rpc GetAllStockData (EmptyMessage) returns (stream StockData);
+	rpc GetAskOffers (AskRequest) returns (stream StockData);
+	rpc GetBidOffers (BidRequest) returns (stream StockData);
+	rpc PlaceOrder (Order) returns (EmptyMessage);
+}
+
+message StockRequest {
+	string symbol = 1;
+}
+
+message StockData {
+	string symbol = 1;
+	string companyName = 2;
+	double priceAtStart = 3;
+	double priceChange = 4;
+	google.protobuf.Timestamp date = 5;
+}
+message StockInfo {
+	string symbol = 1;
+	double currentPrice = 2;
+	string priceChange1h = 3;
+	string priceChange24h = 4;
+	string priceChange7d = 5;
+}
+
+message AskRequest {
+	string symbol = 1;
+	int32 numOffers = 2;
+}
+
+message BidRequest {
+	string symbol = 1;
+	int32 numOffers = 2;
+}
+
+message Order {
+	string symbol = 1;
+	double pricePerShare = 2;
+	int32 numShares = 3;
+}

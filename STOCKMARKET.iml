@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="EclipseModuleManager">
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/animal-sniffer-annotations-1.21.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/annotations-4.1.1.4.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/annotations-api-6.0.53.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/checker-qual-3.12.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/error_prone_annotations-2.18.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/failureaccess-1.0.1.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/grpc-api-1.54.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/grpc-context-1.54.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/grpc-core-1.54.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/grpc-netty-shaded-1.54.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/grpc-protobuf-1.54.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/grpc-protobuf-lite-1.54.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/grpc-stub-1.54.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/gson-2.9.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/guava-31.1-android.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/j2objc-annotations-1.3.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/jsr305-3.0.2.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/perfmark-api-0.25.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/proto-google-common-protos-2.9.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/lib/protobuf-java-3.21.7.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/STOCKMARKET/target/raf-pds-grpc-1.0.jar!/" />
+    <src_description expected_position="1">
+      <src_folder value="file://$MODULE_DIR$/STOCKMARKET/src/main/java" expected_position="1" />
+    </src_description>
+  </component>
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/STOCKMARKET/target/classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/STOCKMARKET/src/main/java" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="animal-sniffer-annotations-1.21.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/animal-sniffer-annotations-1.21.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="annotations-4.1.1.4.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/annotations-4.1.1.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="annotations-api-6.0.53.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/annotations-api-6.0.53.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="checker-qual-3.12.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/checker-qual-3.12.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="error_prone_annotations-2.18.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/error_prone_annotations-2.18.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="failureaccess-1.0.1.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/failureaccess-1.0.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="grpc-api-1.54.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/grpc-api-1.54.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="grpc-context-1.54.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/grpc-context-1.54.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="grpc-core-1.54.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/grpc-core-1.54.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="grpc-netty-shaded-1.54.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/grpc-netty-shaded-1.54.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="grpc-protobuf-1.54.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/grpc-protobuf-1.54.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="grpc-protobuf-lite-1.54.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/grpc-protobuf-lite-1.54.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="grpc-stub-1.54.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/grpc-stub-1.54.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="gson-2.9.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/gson-2.9.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="guava-31.1-android.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/guava-31.1-android.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="j2objc-annotations-1.3.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/j2objc-annotations-1.3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jsr305-3.0.2.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/jsr305-3.0.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="perfmark-api-0.25.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/perfmark-api-0.25.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="proto-google-common-protos-2.9.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/proto-google-common-protos-2.9.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="protobuf-java-3.21.7.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/lib/protobuf-java-3.21.7.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="raf-pds-grpc-1.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/STOCKMARKET/target/raf-pds-grpc-1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-csv:1.8" level="project" />
+  </component>
+</module>
