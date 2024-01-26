@@ -24,14 +24,6 @@ private static final long serialVersionUID = 0L;
     companyName_ = "";
   }
 
-  public StockData(Object symbol_, Object companyName_, double priceAtStart_, double priceChange_, Timestamp date_) {
-    this.symbol_ = symbol_;
-    this.companyName_ = companyName_;
-    this.priceAtStart_ = priceAtStart_;
-    this.priceChange_ = priceChange_;
-    this.date_ = date_;
-  }
-
   public StockData(String symbol, String companyName, double startPrice, double change, Date date) {
 
   }

@@ -35,16 +35,15 @@ public class InitialData {
 
 				System.out.println(symbol + " " + companyName  +" " + startPrice +" " + change +" " + date);
 
-//				StockData stockData = StockData.newBuilder()
-//						.setSymbol(symbol)
-//						.setCompanyName(companyName)
-//						.setPriceAtStart(startPrice)
-//						.setPriceChange(change)
-//						.setDate(Timestamp.newBuilder().setSeconds(System.currentTimeMillis() / 1000).build())  // Use the current time
-//						.build();
+				StockData stockData = StockData.newBuilder()
+						.setSymbol(symbol)
+						.setCompanyName(companyName)
+						.setPriceAtStart(startPrice)
+						.setPriceChange(change)
+						.setDate(t)  // Use the current time
+						.build();
 
-
-				stocks.add(new StockData(symbol, companyName, startPrice, change, date));
+				stocks.add(stockData);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
