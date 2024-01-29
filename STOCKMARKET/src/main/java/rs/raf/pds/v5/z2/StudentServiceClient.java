@@ -37,9 +37,10 @@ public class StudentServiceClient {
 			System.out.println("Датум: " + StockExchangeServiceUtil.timestampToDate(stockData.getDate()));
 			count++;
 		}
+		makeSocketCall();
 	}
 	private static void makeSocketCall() {
-		try (Socket socket = new Socket("localhost", 7999);
+		try (Socket socket = new Socket("localhost", 5455);
 			 PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
 			 BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 

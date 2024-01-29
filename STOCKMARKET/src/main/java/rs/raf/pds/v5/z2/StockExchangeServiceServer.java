@@ -31,19 +31,18 @@ public class StockExchangeServiceServer {
 
 	}
 	private void startSocketServer() {
-		try (ServerSocket serverSocket = new ServerSocket(7999)) {
+		try (ServerSocket serverSocket = new ServerSocket(5455)) {
 			System.out.println("Socket server started on port 7999");
 			while (true) {
 				Socket clientSocket = serverSocket.accept();
 				System.out.println("New client connected: " + clientSocket.getPort());
 
 				// Handle the socket client in a new thread
-				new Thread(() -> handleSocketClient(clientSocket)).start();
+				//new Thread(() -> handleSocketClient(clientSocket)).start();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 	private void handleSocketClient(Socket clientSocket) {
 		try (
