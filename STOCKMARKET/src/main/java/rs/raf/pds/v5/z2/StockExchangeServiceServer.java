@@ -19,19 +19,21 @@ import java.util.concurrent.ConcurrentHashMap;
 public class StockExchangeServiceServer {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
+		System.out.println("cao");
 		StockExchangeServiceServer stockExchangeServer = new StockExchangeServiceServer();
 		Server server = ServerBuilder
           .forPort(8090)
           .addService(new StockExchangeServiceImpl()).build();
 
         server.start();
-        server.awaitTermination();
+        //server.awaitTermination();
 
 		new Thread(() -> stockExchangeServer.startSocketServer()).start();
 
 	}
 	private void startSocketServer() {
-		try (ServerSocket serverSocket = new ServerSocket(5455)) {
+		System.out.println("Trying to start server on port 7999");
+		try (ServerSocket serverSocket = new ServerSocket(7999)) {
 			System.out.println("Socket server started on port 7999");
 			while (true) {
 				Socket clientSocket = serverSocket.accept();
@@ -82,7 +84,7 @@ public class StockExchangeServiceServer {
 
 		
 		protected StockExchangeServiceImpl() {
-			initUnos();
+			//initUnos();
 		}
 		
 		protected void initUnos() {

@@ -26,8 +26,8 @@ public class StudentServiceClient {
 		Iterator<StockData> dataIterator = blockingStub.getAllStockData(EmptyMessage.newBuilder().build());
 
         // Server Streaming gRPC method invitation
-        System.out.println("Stock Market");
-		int count = 0;
+        System.out.println("U MAINU SAM");
+		/*int count = 0;
 		while (count < 10) {
 			StockData stockData = dataIterator.next();
 			System.out.println("Симбол: " + stockData.getSymbol());
@@ -37,15 +37,17 @@ public class StudentServiceClient {
 			System.out.println("Датум: " + StockExchangeServiceUtil.timestampToDate(stockData.getDate()));
 			count++;
 		}
+		 */
 		makeSocketCall();
 	}
 	private static void makeSocketCall() {
-		try (Socket socket = new Socket("localhost", 5455);
+		System.out.println("U MAKESOCKETCALLU SAM");
+		try (Socket socket = new Socket("localhost", 7999);
 			 PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
 			 BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 
 			// Send a message to the server
-			//writer.println("update");
+			writer.println("update");
 
 			try (
 					BufferedReader stdIn = new BufferedReader(
