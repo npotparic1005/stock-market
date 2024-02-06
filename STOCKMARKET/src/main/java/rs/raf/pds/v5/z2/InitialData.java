@@ -29,7 +29,6 @@ public class InitialData {
 				double change = Double.parseDouble(record.get("Net Change"));
 
 				Instant instant = Instant.now();
-				//final Instant instant = java.sql.Timestamp.valueOf(localDate.atStartOfDay()).toInstant();
 				Timestamp t = Timestamp.newBuilder().setSeconds(instant.getEpochSecond()).build();
 				Date date = new Date(t.getSeconds() * 1000);
 

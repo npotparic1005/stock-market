@@ -27,7 +27,17 @@
   		<artifactId>grpc-stub</artifactId>
   		<version>1.54.0</version>
 	</dependency>
-  	<dependency> <!-- necessary for Java 9+ -->
+	  <!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
+	  <dependency>
+		  <groupId>com.google.protobuf</groupId>
+		  <artifactId>protobuf-java</artifactId>
+		  <version>3.24.4</version>
+	  </dependency>
+
+
+
+
+	  <dependency> <!-- necessary for Java 9+ -->
   		<groupId>org.apache.tomcat</groupId>
   		<artifactId>annotations-api</artifactId>
   		<version>6.0.53</version>

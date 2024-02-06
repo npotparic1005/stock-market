@@ -3,10 +3,6 @@
 
 package rs.raf.pds.v5.z2.gRPC;
 
-import com.google.protobuf.Timestamp;
-
-import java.util.Date;
-
 /**
  * Protobuf type {@code StockData}
  */
@@ -22,10 +18,7 @@ private static final long serialVersionUID = 0L;
   private StockData() {
     symbol_ = "";
     companyName_ = "";
-  }
-
-  public StockData(String symbol, String companyName, double startPrice, double change, Date date) {
-
+    history_ = emptyDoubleList();
   }
 
   @java.lang.Override
@@ -174,6 +167,47 @@ private static final long serialVersionUID = 0L;
     return date_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : date_;
   }
 
+  public static final int HISTORY_FIELD_NUMBER = 6;
+  @SuppressWarnings("serial")
+  private com.google.protobuf.Internal.DoubleList history_;
+  /**
+   * <pre>
+   * Assuming history is a list of price changes
+   * </pre>
+   *
+   * <code>repeated double history = 6;</code>
+   * @return A list containing the history.
+   */
+  @java.lang.Override
+  public java.util.List<java.lang.Double>
+      getHistoryList() {
+    return history_;
+  }
+  /**
+   * <pre>
+   * Assuming history is a list of price changes
+   * </pre>
+   *
+   * <code>repeated double history = 6;</code>
+   * @return The count of history.
+   */
+  public int getHistoryCount() {
+    return history_.size();
+  }
+  /**
+   * <pre>
+   * Assuming history is a list of price changes
+   * </pre>
+   *
+   * <code>repeated double history = 6;</code>
+   * @param index The index of the element to return.
+   * @return The history at the given index.
+   */
+  public double getHistory(int index) {
+    return history_.getDouble(index);
+  }
+  private int historyMemoizedSerializedSize = -1;
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -188,6 +222,7 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    getSerializedSize();
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(symbol_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, symbol_);
     }
@@ -202,6 +237,13 @@ private static final long serialVersionUID = 0L;
     }
     if (date_ != null) {
       output.writeMessage(5, getDate());
+    }
+    if (getHistoryList().size() > 0) {
+      output.writeUInt32NoTag(50);
+      output.writeUInt32NoTag(historyMemoizedSerializedSize);
+    }
+    for (int i = 0; i < history_.size(); i++) {
+      output.writeDoubleNoTag(history_.getDouble(i));
     }
     getUnknownFields().writeTo(output);
   }
@@ -229,6 +271,17 @@ private static final long serialVersionUID = 0L;
     if (date_ != null) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(5, getDate());
+    }
+    {
+      int dataSize = 0;
+      dataSize = 8 * getHistoryList().size();
+      size += dataSize;
+      if (!getHistoryList().isEmpty()) {
+        size += 1;
+        size += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(dataSize);
+      }
+      historyMemoizedSerializedSize = dataSize;
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -260,6 +313,8 @@ private static final long serialVersionUID = 0L;
       if (!getDate()
           .equals(other.getDate())) return false;
     }
+    if (!getHistoryList()
+        .equals(other.getHistoryList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -284,6 +339,10 @@ private static final long serialVersionUID = 0L;
     if (hasDate()) {
       hash = (37 * hash) + DATE_FIELD_NUMBER;
       hash = (53 * hash) + getDate().hashCode();
+    }
+    if (getHistoryCount() > 0) {
+      hash = (37 * hash) + HISTORY_FIELD_NUMBER;
+      hash = (53 * hash) + getHistoryList().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -423,6 +482,7 @@ private static final long serialVersionUID = 0L;
         dateBuilder_.dispose();
         dateBuilder_ = null;
       }
+      history_ = emptyDoubleList();
       return this;
     }
 
@@ -449,9 +509,18 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public rs.raf.pds.v5.z2.gRPC.StockData buildPartial() {
       rs.raf.pds.v5.z2.gRPC.StockData result = new rs.raf.pds.v5.z2.gRPC.StockData(this);
+      buildPartialRepeatedFields(result);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
+    }
+
+    private void buildPartialRepeatedFields(rs.raf.pds.v5.z2.gRPC.StockData result) {
+      if (((bitField0_ & 0x00000020) != 0)) {
+        history_.makeImmutable();
+        bitField0_ = (bitField0_ & ~0x00000020);
+      }
+      result.history_ = history_;
     }
 
     private void buildPartial0(rs.raf.pds.v5.z2.gRPC.StockData result) {
@@ -506,6 +575,16 @@ private static final long serialVersionUID = 0L;
       if (other.hasDate()) {
         mergeDate(other.getDate());
       }
+      if (!other.history_.isEmpty()) {
+        if (history_.isEmpty()) {
+          history_ = other.history_;
+          bitField0_ = (bitField0_ & ~0x00000020);
+        } else {
+          ensureHistoryIsMutable();
+          history_.addAll(other.history_);
+        }
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -559,6 +638,22 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000010;
               break;
             } // case 42
+            case 49: {
+              double v = input.readDouble();
+              ensureHistoryIsMutable();
+              history_.addDouble(v);
+              break;
+            } // case 49
+            case 50: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              ensureHistoryIsMutable();
+              while (input.getBytesUntilLimit() > 0) {
+                history_.addDouble(input.readDouble());
+              }
+              input.popLimit(limit);
+              break;
+            } // case 50
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -901,6 +996,115 @@ private static final long serialVersionUID = 0L;
         date_ = null;
       }
       return dateBuilder_;
+    }
+
+    private com.google.protobuf.Internal.DoubleList history_ = emptyDoubleList();
+    private void ensureHistoryIsMutable() {
+      if (!((bitField0_ & 0x00000020) != 0)) {
+        history_ = mutableCopy(history_);
+        bitField0_ |= 0x00000020;
+      }
+    }
+    /**
+     * <pre>
+     * Assuming history is a list of price changes
+     * </pre>
+     *
+     * <code>repeated double history = 6;</code>
+     * @return A list containing the history.
+     */
+    public java.util.List<java.lang.Double>
+        getHistoryList() {
+      return ((bitField0_ & 0x00000020) != 0) ?
+               java.util.Collections.unmodifiableList(history_) : history_;
+    }
+    /**
+     * <pre>
+     * Assuming history is a list of price changes
+     * </pre>
+     *
+     * <code>repeated double history = 6;</code>
+     * @return The count of history.
+     */
+    public int getHistoryCount() {
+      return history_.size();
+    }
+    /**
+     * <pre>
+     * Assuming history is a list of price changes
+     * </pre>
+     *
+     * <code>repeated double history = 6;</code>
+     * @param index The index of the element to return.
+     * @return The history at the given index.
+     */
+    public double getHistory(int index) {
+      return history_.getDouble(index);
+    }
+    /**
+     * <pre>
+     * Assuming history is a list of price changes
+     * </pre>
+     *
+     * <code>repeated double history = 6;</code>
+     * @param index The index to set the value at.
+     * @param value The history to set.
+     * @return This builder for chaining.
+     */
+    public Builder setHistory(
+        int index, double value) {
+
+      ensureHistoryIsMutable();
+      history_.setDouble(index, value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Assuming history is a list of price changes
+     * </pre>
+     *
+     * <code>repeated double history = 6;</code>
+     * @param value The history to add.
+     * @return This builder for chaining.
+     */
+    public Builder addHistory(double value) {
+
+      ensureHistoryIsMutable();
+      history_.addDouble(value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Assuming history is a list of price changes
+     * </pre>
+     *
+     * <code>repeated double history = 6;</code>
+     * @param values The history to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllHistory(
+        java.lang.Iterable<? extends java.lang.Double> values) {
+      ensureHistoryIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, history_);
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * Assuming history is a list of price changes
+     * </pre>
+     *
+     * <code>repeated double history = 6;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearHistory() {
+      history_ = emptyDoubleList();
+      bitField0_ = (bitField0_ & ~0x00000020);
+      onChanged();
+      return this;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

@@ -78,15 +78,15 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int NUMOFFERS_FIELD_NUMBER = 2;
-  private int numOffers_ = 0;
+  public static final int LIMIT_FIELD_NUMBER = 2;
+  private int limit_ = 0;
   /**
-   * <code>int32 numOffers = 2;</code>
-   * @return The numOffers.
+   * <code>int32 limit = 2;</code>
+   * @return The limit.
    */
   @java.lang.Override
-  public int getNumOffers() {
-    return numOffers_;
+  public int getLimit() {
+    return limit_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -106,8 +106,8 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(symbol_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, symbol_);
     }
-    if (numOffers_ != 0) {
-      output.writeInt32(2, numOffers_);
+    if (limit_ != 0) {
+      output.writeInt32(2, limit_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -121,9 +121,9 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(symbol_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, symbol_);
     }
-    if (numOffers_ != 0) {
+    if (limit_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(2, numOffers_);
+        .computeInt32Size(2, limit_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -142,8 +142,8 @@ private static final long serialVersionUID = 0L;
 
     if (!getSymbol()
         .equals(other.getSymbol())) return false;
-    if (getNumOffers()
-        != other.getNumOffers()) return false;
+    if (getLimit()
+        != other.getLimit()) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -157,8 +157,8 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + SYMBOL_FIELD_NUMBER;
     hash = (53 * hash) + getSymbol().hashCode();
-    hash = (37 * hash) + NUMOFFERS_FIELD_NUMBER;
-    hash = (53 * hash) + getNumOffers();
+    hash = (37 * hash) + LIMIT_FIELD_NUMBER;
+    hash = (53 * hash) + getLimit();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -289,7 +289,7 @@ private static final long serialVersionUID = 0L;
       super.clear();
       bitField0_ = 0;
       symbol_ = "";
-      numOffers_ = 0;
+      limit_ = 0;
       return this;
     }
 
@@ -327,7 +327,7 @@ private static final long serialVersionUID = 0L;
         result.symbol_ = symbol_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.numOffers_ = numOffers_;
+        result.limit_ = limit_;
       }
     }
 
@@ -348,8 +348,8 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000001;
         onChanged();
       }
-      if (other.getNumOffers() != 0) {
-        setNumOffers(other.getNumOffers());
+      if (other.getLimit() != 0) {
+        setLimit(other.getLimit());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -383,7 +383,7 @@ private static final long serialVersionUID = 0L;
               break;
             } // case 10
             case 16: {
-              numOffers_ = input.readInt32();
+              limit_ = input.readInt32();
               bitField0_ |= 0x00000002;
               break;
             } // case 16
@@ -476,34 +476,34 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private int numOffers_ ;
+    private int limit_ ;
     /**
-     * <code>int32 numOffers = 2;</code>
-     * @return The numOffers.
+     * <code>int32 limit = 2;</code>
+     * @return The limit.
      */
     @java.lang.Override
-    public int getNumOffers() {
-      return numOffers_;
+    public int getLimit() {
+      return limit_;
     }
     /**
-     * <code>int32 numOffers = 2;</code>
-     * @param value The numOffers to set.
+     * <code>int32 limit = 2;</code>
+     * @param value The limit to set.
      * @return This builder for chaining.
      */
-    public Builder setNumOffers(int value) {
+    public Builder setLimit(int value) {
 
-      numOffers_ = value;
+      limit_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
     /**
-     * <code>int32 numOffers = 2;</code>
+     * <code>int32 limit = 2;</code>
      * @return This builder for chaining.
      */
-    public Builder clearNumOffers() {
+    public Builder clearLimit() {
       bitField0_ = (bitField0_ & ~0x00000002);
-      numOffers_ = 0;
+      limit_ = 0;
       onChanged();
       return this;
     }

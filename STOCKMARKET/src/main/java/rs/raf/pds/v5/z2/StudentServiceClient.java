@@ -5,88 +5,294 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Iterator;
+import java.net.UnknownHostException;
+import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
+import io.grpc.*;
 import rs.raf.pds.v5.z2.gRPC.*;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannel;
 
 
-public class StudentServiceClient {
-	
-	public static void main(String[] args) {
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8090)
-          .usePlaintext()
-          .build();
+public class StudentServiceClient extends StudentServiceGrpc.StudentServiceImplBase {
 
-        StockExchangeServiceGrpc.StockExchangeServiceStub asyncStub = StockExchangeServiceGrpc.newStub(channel);
-		StockExchangeServiceGrpc.StockExchangeServiceBlockingStub blockingStub = StockExchangeServiceGrpc.newBlockingStub(channel);
+	private Client client;
+	private Socket tcpSocket;
+	StockExchangeServiceGrpc.StockExchangeServiceBlockingStub blockingStub;
 
-// Make the gRPC call
-		Iterator<StockData> dataIterator = blockingStub.getAllStockData(EmptyMessage.newBuilder().build());
+	private final ManagedChannel grpcChannel;
 
-        // Server Streaming gRPC method invitation
-        System.out.println("U MAINU SAM");
-		/*int count = 0;
-		while (count < 10) {
-			StockData stockData = dataIterator.next();
-			System.out.println("Симбол: " + stockData.getSymbol());
-			System.out.println("Назив компаније: " + stockData.getCompanyName());
-			System.out.println("Цена (на почетку дана): " + stockData.getPriceAtStart());
-			System.out.println("Промена (у односу на почетак дана): " + stockData.getPriceChange());
-			System.out.println("Датум: " + StockExchangeServiceUtil.timestampToDate(stockData.getDate()));
-			count++;
-		}
-		 */
-		makeSocketCall();
+
+	public StudentServiceClient(ManagedChannel channel) {
+		blockingStub = StockExchangeServiceGrpc.newBlockingStub(channel);
+		this.client = generateClient();
+		grpcChannel = channel;
+
 	}
-	private static void makeSocketCall() {
-		System.out.println("U MAKESOCKETCALLU SAM");
-		try (Socket socket = new Socket("localhost", 7999);
-			 PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
-			 BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
-
-			// Send a message to the server
-			writer.println("update");
-
-			try (
-					BufferedReader stdIn = new BufferedReader(
-							new InputStreamReader(System.in))    // Za čitanje sa standardnog ulaza - tastature!
-			) {
-
-				String userInput;
-				boolean running = true;
-
-				while (running) {
-					userInput = stdIn.readLine();
-					if (userInput == null || "BYE".equalsIgnoreCase(userInput)) // userInput - tekst koji je unet sa tastature!
-					{
-						running = false;
-					} else if (userInput.startsWith("track")) {
-						String[] parts = userInput.split(" ", 2);
-						if (parts.length == 2) {
-							String track = parts[0];
-							String symbol = parts[1];
-							String saljem = track + " " + symbol;
-							writer.println(saljem);
 
 
-						}
-					}
+	private static Client generateClient() {
+		// Generate a unique client ID
+		String clientId = UUID.randomUUID().toString();
+
+		// Create stock information for the client
+		StockInfo stock1 = StockInfo.newBuilder()
+
+				.setSymbol("CVCO") // Set the stock symbol for the order
+				.setNumShares(100)// Set the number of shares
+				.build(); // Build the Order object
+
+
+
+		StockInfo stock2 = StockInfo.newBuilder()
+
+				.setSymbol("MSTF") // Set the stock symbol for the order
+				.setNumShares(100)// Set the number of shares
+				.build(); // Build the Order object
+
+		Client client = Client.newBuilder()
+				.setClientId(clientId)
+				.addStocks(stock1)
+				.addStocks(stock2)
+				// Add more stocks as needed
+				.build();
+
+
+		return client;
+	}
+
+	private void sendUserIdToServer() {
+		try {
+			tcpSocket = new Socket("localhost", 7999);
+			PrintWriter writer = new PrintWriter(tcpSocket.getOutputStream(), true);
+			writer.println(client);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+
+public static void main(String[] args) throws UnknownHostException, IOException {
+	ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8090)
+			.usePlaintext()
+			.build();
+	StudentServiceClient client = new StudentServiceClient(channel);
+	registerClient(client);
+//        BerzaServiceGrpc.BerzaServiceBlockingStub blockingStub = BerzaServiceGrpc.newBlockingStub(channel);
+//        BerzaServiceGrpc.BerzaServiceStub asyncStub = BerzaServiceGrpc.newStub(channel);
+
+
+
+	//registerClient(client);
+
+	try(Socket socket = new Socket("localhost",7999)){
+		System.out.println("Client connected." );
+
+
+		BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+		String userId = client.client.getClientId();
+		writer.println(userId);
+		Scanner scanner = new Scanner(System.in);
+		Thread serverListener = new Thread(() -> {
+			String serverMessage;
+			try {
+				while ((serverMessage = in.readLine()) != null) {
+
+					System.out.println(serverMessage);
+
+
 				}
-
-				// Read the server's response
-				String serverResponse;
-				while ((serverResponse = reader.readLine()) != null) {
-					System.out.println("server kaze: " + serverResponse);
-				}
-
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			throw new RuntimeException(e);
+		});
+		serverListener.start();
+
+		Thread grpcThread = new Thread(() -> {
+			while (true) {
+				// Handle user input continuously
+				handleUserInput(client, scanner, client.blockingStub);
+			}
+		});
+
+		grpcThread.start();
+
+		try {
+			grpcThread.join();
+			serverListener.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+
+	}
+	channel.shutdown();
+}
+	private static void registerClient(StudentServiceClient client) {
+		try {
+			RegisterResponse registerResponse = client.blockingStub.registerClient(client.client);
+
+			if (registerResponse.getSuccess()) {
+				System.out.println("Client registration successful. Client ID: " + client.client.getClientId());
+			} else {
+				System.out.println("Client registration failed.");
+			}
+		} catch (StatusRuntimeException e) {
+			System.out.println("Error registering client: " + e.getStatus());
 		}
 	}
+	public void subscribeToStocks(List<String> symbols, String clientId, StockExchangeServiceGrpc.StockExchangeServiceBlockingStub blockingStub) {
+		SubscriptionRequest request = SubscriptionRequest.newBuilder()
+				.setClientId(clientId)
+				.addAllSymbols(symbols)
+				.build();
+
+		try {
+			SubscribeResponse response = blockingStub.addSubscriber(request);
+
+			System.out.println("Subscription successful.");
+		} catch (StatusRuntimeException e) {
+			System.err.println("RPC failed: " + e.getStatus());
+		}
+	}
+	public void placeOrder(String clientId, String symbol, double price, int numShares, boolean isBid, StockExchangeServiceGrpc.StockExchangeServiceBlockingStub blockingStub) {
+		Order order = Order.newBuilder()
+				.setClientId(clientId)
+				.setSymbol(symbol)
+				.setPrice(price)
+				.setNumShares(numShares)
+				.setIsBid(isBid) // true for buy order, false for sell order
+				.setOrderId(UUID.randomUUID().toString())
+				.build();
+
+		try {
+			OrderResponse response = blockingStub.placeOrder(order);
+			if (response.getSuccess()) {
+				System.out.println("Izvrsen trade");
+			} else {
+				System.out.println("Order placed");
+			}
+		} catch (StatusRuntimeException e) {
+			System.err.println("RPC failed: " + e.getStatus());
+		}
+	}
+	public void getAskOffers(String symbol, int limit, StockExchangeServiceGrpc.StockExchangeServiceBlockingStub blockingStub) {
+		AskRequest request = AskRequest.newBuilder()
+				.setSymbol(symbol)
+				.setLimit(limit)
+				.build();
+
+		try {
+			OrderList response = blockingStub.getAskOffers(request);
+			System.out.println("Ask offers for " + symbol + ":");
+			for (Order order : response.getOffersList()) {
+				System.out.println("Client ID: " + order.getClientId() +
+						", Symbol: " + order.getSymbol() +
+						", Price: " + order.getPrice() +
+						", Quantity: " + order.getNumShares());
+			}
+		} catch (StatusRuntimeException e) {
+			System.err.println("RPC failed: " + e.getStatus());
+		}
+	}
+
+
+	public void getBidOffers(String symbol, int limit, StockExchangeServiceGrpc.StockExchangeServiceBlockingStub blockingStub) {
+		BidRequest request = BidRequest.newBuilder()
+				.setSymbol(symbol)
+				.setLimit(limit)
+				.build();
+
+		try {
+			OrderList response = blockingStub.getBidOffers(request);
+			System.out.println("Bid offers for " + symbol + ":");
+			for (Order order : response.getOffersList()) {
+				System.out.println("Client ID: " + order.getClientId() +
+						", Symbol: " + order.getSymbol() +
+						", Price: " + order.getPrice() +
+						", Quantity: " + order.getNumShares());
+			}
+		} catch (StatusRuntimeException e) {
+			System.err.println("RPC failed: " + e.getStatus());
+		}
+	}
+	private static final int UPDATE_INTERVAL = 6; // in minutes
+	private static ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+	private static ScheduledFuture<?> scheduledFuture;
+
+	private static void handleUserInput(StudentServiceClient grpcClient, Scanner scanner, StockExchangeServiceGrpc.StockExchangeServiceBlockingStub blockingStub) {
+		System.out.println("Enter command:");
+		String choice = scanner.nextLine();  // Read user input
+		String[] parts = choice.split(" ");  // Split the input into parts
+
+		try {
+			switch (parts[0].toUpperCase()) {
+				case "ASK":
+					if (parts.length == 3) {
+						String symbol = parts[1];
+						int limit = Integer.parseInt(parts[2]);
+						grpcClient.getAskOffers(symbol, limit, blockingStub);
+					} else {
+						System.out.println("Invalid ASK command format.");
+					}
+					break;
+
+				case "BID":
+					if (parts.length == 3) {
+						String symbol = parts[1];
+						int limit = Integer.parseInt(parts[2]);
+						grpcClient.getBidOffers(symbol, limit, blockingStub);
+					} else {
+						System.out.println("Invalid BID command format.");
+					}
+					break;
+
+				case "ORDERPRODAJA":
+					if (parts.length == 4) {
+						String symbol = parts[1];
+						double price = Double.parseDouble(parts[2]);
+						int numShares = Integer.parseInt(parts[3]);
+						grpcClient.placeOrder(grpcClient.client.getClientId(), symbol, price, numShares, false, blockingStub);
+					} else {
+						System.out.println("Invalid ORDER command format.");
+					}
+					break;
+				case "ORDERKUPOVINA":
+					if (parts.length == 4) {
+						String symbol = parts[1];
+						double price = Double.parseDouble(parts[2]);
+						int numShares = Integer.parseInt(parts[3]);
+						grpcClient.placeOrder(grpcClient.client.getClientId(), symbol, price, numShares, true, blockingStub);
+					} else {
+						System.out.println("Invalid ORDER command format.");
+					}
+					break;
+
+				case "SUBSCRIBE":
+					if (parts.length > 1) {
+						List<String> symbols = Arrays.asList(parts).subList(1, parts.length);
+						grpcClient.subscribeToStocks(symbols, grpcClient.client.getClientId(), blockingStub);
+					} else {
+						System.out.println("Invalid SUBSCRIBE command format.");
+					}
+					break;
+
+
+				default:
+					System.out.println("Unknown command. Please try again.");
+					break;
+			}
+		} catch (NumberFormatException e) {
+			System.out.println("Error parsing command parameters: " + e.getMessage());
+		} catch (StatusRuntimeException e) {
+			System.out.println("RPC failed: " + e.getStatus());
+		}
+	}
+
 
 }

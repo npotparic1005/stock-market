@@ -8,26 +8,60 @@ public interface OrderOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string symbol = 1;</code>
+   * <code>string orderId = 1;</code>
+   * @return The orderId.
+   */
+  java.lang.String getOrderId();
+  /**
+   * <code>string orderId = 1;</code>
+   * @return The bytes for orderId.
+   */
+  com.google.protobuf.ByteString
+      getOrderIdBytes();
+
+  /**
+   * <code>string clientId = 2;</code>
+   * @return The clientId.
+   */
+  java.lang.String getClientId();
+  /**
+   * <code>string clientId = 2;</code>
+   * @return The bytes for clientId.
+   */
+  com.google.protobuf.ByteString
+      getClientIdBytes();
+
+  /**
+   * <code>string symbol = 3;</code>
    * @return The symbol.
    */
   java.lang.String getSymbol();
   /**
-   * <code>string symbol = 1;</code>
+   * <code>string symbol = 3;</code>
    * @return The bytes for symbol.
    */
   com.google.protobuf.ByteString
       getSymbolBytes();
 
   /**
-   * <code>double pricePerShare = 2;</code>
-   * @return The pricePerShare.
+   * <code>double price = 4;</code>
+   * @return The price.
    */
-  double getPricePerShare();
+  double getPrice();
 
   /**
-   * <code>int32 numShares = 3;</code>
+   * <code>int32 numShares = 5;</code>
    * @return The numShares.
    */
   int getNumShares();
+
+  /**
+   * <pre>
+   *da li je za kupovinu
+   * </pre>
+   *
+   * <code>bool isBid = 6;</code>
+   * @return The isBid.
+   */
+  boolean getIsBid();
 }

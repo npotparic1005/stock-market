@@ -10,9 +10,11 @@ service StockExchangeService {
 
 	rpc GetStockData(StockRequest) returns (StockData) {}
 	rpc GetAllStockData (EmptyMessage) returns (stream StockData);
-	rpc GetAskOffers (AskRequest) returns (stream StockData);
-	rpc GetBidOffers (BidRequest) returns (stream StockData);
-	rpc PlaceOrder (Order) returns (EmptyMessage);
+	rpc GetAskOffers (AskRequest) returns (OrderList);
+	rpc GetBidOffers (BidRequest) returns (OrderList);
+	rpc RegisterClient(Client) returns (RegisterResponse);
+	rpc AddSubscriber(SubscriptionRequest) returns (SubscribeResponse);
+	rpc PlaceOrder(Order) returns (OrderResponse);
 }
 
 message StockRequest {
@@ -25,27 +27,60 @@ message StockData {
 	double priceAtStart = 3;
 	double priceChange = 4;
 	google.protobuf.Timestamp date = 5;
-}
-message StockInfo {
-	string symbol = 1;
-	double currentPrice = 2;
-	string priceChange1h = 3;
-	string priceChange24h = 4;
-	string priceChange7d = 5;
+	repeated double history = 6; // Assuming history is a list of price changes
+
 }
 
 message AskRequest {
 	string symbol = 1;
-	int32 numOffers = 2;
+	int32 limit = 2;
 }
 
 message BidRequest {
 	string symbol = 1;
-	int32 numOffers = 2;
+	int32 limit= 2;
 }
 
 message Order {
-	string symbol = 1;
-	double pricePerShare = 2;
-	int32 numShares = 3;
+	string orderId = 1;
+	string clientId = 2;
+	string symbol = 3;
+	double price = 4;
+	int32 numShares =5;
+	bool isBid=6;//da li je za kupovinu, true jeste
+
 }
+
+
+message Client {
+	string clientId = 1;
+	repeated StockInfo stocks = 2;
+
+}
+message StockInfo{
+	string symbol=1;
+	int32 numShares=2;
+
+}
+
+
+message SubscriptionRequest {
+	repeated string symbols=1;
+	string clientId = 2;
+}
+
+message RegisterResponse {
+	bool success = 1;
+}
+
+message OrderResponse {
+	bool success = 1;
+}
+message SubscribeResponse {
+	bool success = 1;
+}
+
+message OrderList {
+	repeated Order offers = 1;
+}
+

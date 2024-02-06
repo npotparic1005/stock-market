@@ -20,8 +20,8 @@ public interface BidRequestOrBuilder extends
       getSymbolBytes();
 
   /**
-   * <code>int32 numOffers = 2;</code>
-   * @return The numOffers.
+   * <code>int32 limit = 2;</code>
+   * @return The limit.
    */
-  int getNumOffers();
+  int getLimit();
 }

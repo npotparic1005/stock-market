@@ -20,44 +20,8 @@ public interface StockInfoOrBuilder extends
       getSymbolBytes();
 
   /**
-   * <code>double currentPrice = 2;</code>
-   * @return The currentPrice.
+   * <code>int32 numShares = 2;</code>
+   * @return The numShares.
    */
-  double getCurrentPrice();
-
-  /**
-   * <code>string priceChange1h = 3;</code>
-   * @return The priceChange1h.
-   */
-  java.lang.String getPriceChange1H();
-  /**
-   * <code>string priceChange1h = 3;</code>
-   * @return The bytes for priceChange1h.
-   */
-  com.google.protobuf.ByteString
-      getPriceChange1HBytes();
-
-  /**
-   * <code>string priceChange24h = 4;</code>
-   * @return The priceChange24h.
-   */
-  java.lang.String getPriceChange24H();
-  /**
-   * <code>string priceChange24h = 4;</code>
-   * @return The bytes for priceChange24h.
-   */
-  com.google.protobuf.ByteString
-      getPriceChange24HBytes();
-
-  /**
-   * <code>string priceChange7d = 5;</code>
-   * @return The priceChange7d.
-   */
-  java.lang.String getPriceChange7D();
-  /**
-   * <code>string priceChange7d = 5;</code>
-   * @return The bytes for priceChange7d.
-   */
-  com.google.protobuf.ByteString
-      getPriceChange7DBytes();
+  int getNumShares();
 }

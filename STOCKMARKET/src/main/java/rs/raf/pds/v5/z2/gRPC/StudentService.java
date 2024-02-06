@@ -30,11 +30,6 @@ public final class StudentService {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_StockData_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_StockInfo_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_StockInfo_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_AskRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -49,6 +44,41 @@ public final class StudentService {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Order_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Client_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_Client_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_StockInfo_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_StockInfo_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_SubscriptionRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_SubscriptionRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_RegisterResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_RegisterResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_OrderResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_OrderResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_SubscribeResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_SubscribeResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_OrderList_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_OrderList_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -60,25 +90,33 @@ public final class StudentService {
     java.lang.String[] descriptorData = {
       "\n\025student_service.proto\032\037google/protobuf" +
       "/timestamp.proto\"\016\n\014EmptyMessage\"\036\n\014Stoc" +
-      "kRequest\022\016\n\006symbol\030\001 \001(\t\"\205\001\n\tStockData\022\016" +
+      "kRequest\022\016\n\006symbol\030\001 \001(\t\"\226\001\n\tStockData\022\016" +
       "\n\006symbol\030\001 \001(\t\022\023\n\013companyName\030\002 \001(\t\022\024\n\014p" +
       "riceAtStart\030\003 \001(\001\022\023\n\013priceChange\030\004 \001(\001\022(" +
       "\n\004date\030\005 \001(\0132\032.google.protobuf.Timestamp" +
-      "\"w\n\tStockInfo\022\016\n\006symbol\030\001 \001(\t\022\024\n\014current" +
-      "Price\030\002 \001(\001\022\025\n\rpriceChange1h\030\003 \001(\t\022\026\n\016pr" +
-      "iceChange24h\030\004 \001(\t\022\025\n\rpriceChange7d\030\005 \001(" +
-      "\t\"/\n\nAskRequest\022\016\n\006symbol\030\001 \001(\t\022\021\n\tnumOf" +
-      "fers\030\002 \001(\005\"/\n\nBidRequest\022\016\n\006symbol\030\001 \001(\t" +
-      "\022\021\n\tnumOffers\030\002 \001(\005\"A\n\005Order\022\016\n\006symbol\030\001" +
-      " \001(\t\022\025\n\rpricePerShare\030\002 \001(\001\022\021\n\tnumShares" +
-      "\030\003 \001(\0052\356\001\n\024StockExchangeService\022+\n\014GetSt" +
-      "ockData\022\r.StockRequest\032\n.StockData\"\000\022.\n\017" +
-      "GetAllStockData\022\r.EmptyMessage\032\n.StockDa" +
-      "ta0\001\022)\n\014GetAskOffers\022\013.AskRequest\032\n.Stoc" +
-      "kData0\001\022)\n\014GetBidOffers\022\013.BidRequest\032\n.S" +
-      "tockData0\001\022#\n\nPlaceOrder\022\006.Order\032\r.Empty" +
-      "MessageB\031\n\025rs.raf.pds.v5.z2.gRPCP\001b\006prot" +
-      "o3"
+      "\022\017\n\007history\030\006 \003(\001\"+\n\nAskRequest\022\016\n\006symbo" +
+      "l\030\001 \001(\t\022\r\n\005limit\030\002 \001(\005\"+\n\nBidRequest\022\016\n\006" +
+      "symbol\030\001 \001(\t\022\r\n\005limit\030\002 \001(\005\"k\n\005Order\022\017\n\007" +
+      "orderId\030\001 \001(\t\022\020\n\010clientId\030\002 \001(\t\022\016\n\006symbo" +
+      "l\030\003 \001(\t\022\r\n\005price\030\004 \001(\001\022\021\n\tnumShares\030\005 \001(" +
+      "\005\022\r\n\005isBid\030\006 \001(\010\"6\n\006Client\022\020\n\010clientId\030\001" +
+      " \001(\t\022\032\n\006stocks\030\002 \003(\0132\n.StockInfo\".\n\tStoc" +
+      "kInfo\022\016\n\006symbol\030\001 \001(\t\022\021\n\tnumShares\030\002 \001(\005" +
+      "\"8\n\023SubscriptionRequest\022\017\n\007symbols\030\001 \003(\t" +
+      "\022\020\n\010clientId\030\002 \001(\t\"#\n\020RegisterResponse\022\017" +
+      "\n\007success\030\001 \001(\010\" \n\rOrderResponse\022\017\n\007succ" +
+      "ess\030\001 \001(\010\"$\n\021SubscribeResponse\022\017\n\007succes" +
+      "s\030\001 \001(\010\"#\n\tOrderList\022\026\n\006offers\030\001 \003(\0132\006.O" +
+      "rder2\324\002\n\024StockExchangeService\022+\n\014GetStoc" +
+      "kData\022\r.StockRequest\032\n.StockData\"\000\022.\n\017Ge" +
+      "tAllStockData\022\r.EmptyMessage\032\n.StockData" +
+      "0\001\022\'\n\014GetAskOffers\022\013.AskRequest\032\n.OrderL" +
+      "ist\022\'\n\014GetBidOffers\022\013.BidRequest\032\n.Order" +
+      "List\022,\n\016RegisterClient\022\007.Client\032\021.Regist" +
+      "erResponse\0229\n\rAddSubscriber\022\024.Subscripti" +
+      "onRequest\032\022.SubscribeResponse\022$\n\nPlaceOr" +
+      "der\022\006.Order\032\016.OrderResponseB\031\n\025rs.raf.pd" +
+      "s.v5.z2.gRPCP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -102,31 +140,67 @@ public final class StudentService {
     internal_static_StockData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_StockData_descriptor,
-        new java.lang.String[] { "Symbol", "CompanyName", "PriceAtStart", "PriceChange", "Date", });
-    internal_static_StockInfo_descriptor =
-      getDescriptor().getMessageTypes().get(3);
-    internal_static_StockInfo_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_StockInfo_descriptor,
-        new java.lang.String[] { "Symbol", "CurrentPrice", "PriceChange1H", "PriceChange24H", "PriceChange7D", });
+        new java.lang.String[] { "Symbol", "CompanyName", "PriceAtStart", "PriceChange", "Date", "History", });
     internal_static_AskRequest_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_AskRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_AskRequest_descriptor,
-        new java.lang.String[] { "Symbol", "NumOffers", });
+        new java.lang.String[] { "Symbol", "Limit", });
     internal_static_BidRequest_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_BidRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_BidRequest_descriptor,
-        new java.lang.String[] { "Symbol", "NumOffers", });
+        new java.lang.String[] { "Symbol", "Limit", });
     internal_static_Order_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_Order_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Order_descriptor,
-        new java.lang.String[] { "Symbol", "PricePerShare", "NumShares", });
+        new java.lang.String[] { "OrderId", "ClientId", "Symbol", "Price", "NumShares", "IsBid", });
+    internal_static_Client_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_Client_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Client_descriptor,
+        new java.lang.String[] { "ClientId", "Stocks", });
+    internal_static_StockInfo_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_StockInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_StockInfo_descriptor,
+        new java.lang.String[] { "Symbol", "NumShares", });
+    internal_static_SubscriptionRequest_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_SubscriptionRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_SubscriptionRequest_descriptor,
+        new java.lang.String[] { "Symbols", "ClientId", });
+    internal_static_RegisterResponse_descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_RegisterResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_RegisterResponse_descriptor,
+        new java.lang.String[] { "Success", });
+    internal_static_OrderResponse_descriptor =
+      getDescriptor().getMessageTypes().get(10);
+    internal_static_OrderResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_OrderResponse_descriptor,
+        new java.lang.String[] { "Success", });
+    internal_static_SubscribeResponse_descriptor =
+      getDescriptor().getMessageTypes().get(11);
+    internal_static_SubscribeResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_SubscribeResponse_descriptor,
+        new java.lang.String[] { "Success", });
+    internal_static_OrderList_descriptor =
+      getDescriptor().getMessageTypes().get(12);
+    internal_static_OrderList_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_OrderList_descriptor,
+        new java.lang.String[] { "Offers", });
     com.google.protobuf.TimestampProto.getDescriptor();
   }
 

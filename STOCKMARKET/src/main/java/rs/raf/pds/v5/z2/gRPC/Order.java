@@ -16,6 +16,8 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private Order() {
+    orderId_ = "";
+    clientId_ = "";
     symbol_ = "";
   }
 
@@ -39,11 +41,89 @@ private static final long serialVersionUID = 0L;
             rs.raf.pds.v5.z2.gRPC.Order.class, rs.raf.pds.v5.z2.gRPC.Order.Builder.class);
   }
 
-  public static final int SYMBOL_FIELD_NUMBER = 1;
+  public static final int ORDERID_FIELD_NUMBER = 1;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object orderId_ = "";
+  /**
+   * <code>string orderId = 1;</code>
+   * @return The orderId.
+   */
+  @java.lang.Override
+  public java.lang.String getOrderId() {
+    java.lang.Object ref = orderId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      orderId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string orderId = 1;</code>
+   * @return The bytes for orderId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getOrderIdBytes() {
+    java.lang.Object ref = orderId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      orderId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int CLIENTID_FIELD_NUMBER = 2;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object clientId_ = "";
+  /**
+   * <code>string clientId = 2;</code>
+   * @return The clientId.
+   */
+  @java.lang.Override
+  public java.lang.String getClientId() {
+    java.lang.Object ref = clientId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      clientId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string clientId = 2;</code>
+   * @return The bytes for clientId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getClientIdBytes() {
+    java.lang.Object ref = clientId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      clientId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int SYMBOL_FIELD_NUMBER = 3;
   @SuppressWarnings("serial")
   private volatile java.lang.Object symbol_ = "";
   /**
-   * <code>string symbol = 1;</code>
+   * <code>string symbol = 3;</code>
    * @return The symbol.
    */
   @java.lang.Override
@@ -60,7 +140,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string symbol = 1;</code>
+   * <code>string symbol = 3;</code>
    * @return The bytes for symbol.
    */
   @java.lang.Override
@@ -78,26 +158,41 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int PRICEPERSHARE_FIELD_NUMBER = 2;
-  private double pricePerShare_ = 0D;
+  public static final int PRICE_FIELD_NUMBER = 4;
+  private double price_ = 0D;
   /**
-   * <code>double pricePerShare = 2;</code>
-   * @return The pricePerShare.
+   * <code>double price = 4;</code>
+   * @return The price.
    */
   @java.lang.Override
-  public double getPricePerShare() {
-    return pricePerShare_;
+  public double getPrice() {
+    return price_;
   }
 
-  public static final int NUMSHARES_FIELD_NUMBER = 3;
+  public static final int NUMSHARES_FIELD_NUMBER = 5;
   private int numShares_ = 0;
   /**
-   * <code>int32 numShares = 3;</code>
+   * <code>int32 numShares = 5;</code>
    * @return The numShares.
    */
   @java.lang.Override
   public int getNumShares() {
     return numShares_;
+  }
+
+  public static final int ISBID_FIELD_NUMBER = 6;
+  private boolean isBid_ = false;
+  /**
+   * <pre>
+   *da li je za kupovinu
+   * </pre>
+   *
+   * <code>bool isBid = 6;</code>
+   * @return The isBid.
+   */
+  @java.lang.Override
+  public boolean getIsBid() {
+    return isBid_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -114,14 +209,23 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(symbol_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, symbol_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(orderId_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, orderId_);
     }
-    if (java.lang.Double.doubleToRawLongBits(pricePerShare_) != 0) {
-      output.writeDouble(2, pricePerShare_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(clientId_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, clientId_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(symbol_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, symbol_);
+    }
+    if (java.lang.Double.doubleToRawLongBits(price_) != 0) {
+      output.writeDouble(4, price_);
     }
     if (numShares_ != 0) {
-      output.writeInt32(3, numShares_);
+      output.writeInt32(5, numShares_);
+    }
+    if (isBid_ != false) {
+      output.writeBool(6, isBid_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -132,16 +236,26 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(symbol_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, symbol_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(orderId_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, orderId_);
     }
-    if (java.lang.Double.doubleToRawLongBits(pricePerShare_) != 0) {
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(clientId_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, clientId_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(symbol_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, symbol_);
+    }
+    if (java.lang.Double.doubleToRawLongBits(price_) != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeDoubleSize(2, pricePerShare_);
+        .computeDoubleSize(4, price_);
     }
     if (numShares_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(3, numShares_);
+        .computeInt32Size(5, numShares_);
+    }
+    if (isBid_ != false) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(6, isBid_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -158,13 +272,19 @@ private static final long serialVersionUID = 0L;
     }
     rs.raf.pds.v5.z2.gRPC.Order other = (rs.raf.pds.v5.z2.gRPC.Order) obj;
 
+    if (!getOrderId()
+        .equals(other.getOrderId())) return false;
+    if (!getClientId()
+        .equals(other.getClientId())) return false;
     if (!getSymbol()
         .equals(other.getSymbol())) return false;
-    if (java.lang.Double.doubleToLongBits(getPricePerShare())
+    if (java.lang.Double.doubleToLongBits(getPrice())
         != java.lang.Double.doubleToLongBits(
-            other.getPricePerShare())) return false;
+            other.getPrice())) return false;
     if (getNumShares()
         != other.getNumShares()) return false;
+    if (getIsBid()
+        != other.getIsBid()) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -176,13 +296,20 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + ORDERID_FIELD_NUMBER;
+    hash = (53 * hash) + getOrderId().hashCode();
+    hash = (37 * hash) + CLIENTID_FIELD_NUMBER;
+    hash = (53 * hash) + getClientId().hashCode();
     hash = (37 * hash) + SYMBOL_FIELD_NUMBER;
     hash = (53 * hash) + getSymbol().hashCode();
-    hash = (37 * hash) + PRICEPERSHARE_FIELD_NUMBER;
+    hash = (37 * hash) + PRICE_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        java.lang.Double.doubleToLongBits(getPricePerShare()));
+        java.lang.Double.doubleToLongBits(getPrice()));
     hash = (37 * hash) + NUMSHARES_FIELD_NUMBER;
     hash = (53 * hash) + getNumShares();
+    hash = (37 * hash) + ISBID_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getIsBid());
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -312,9 +439,12 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
+      orderId_ = "";
+      clientId_ = "";
       symbol_ = "";
-      pricePerShare_ = 0D;
+      price_ = 0D;
       numShares_ = 0;
+      isBid_ = false;
       return this;
     }
 
@@ -349,13 +479,22 @@ private static final long serialVersionUID = 0L;
     private void buildPartial0(rs.raf.pds.v5.z2.gRPC.Order result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.symbol_ = symbol_;
+        result.orderId_ = orderId_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.pricePerShare_ = pricePerShare_;
+        result.clientId_ = clientId_;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.symbol_ = symbol_;
+      }
+      if (((from_bitField0_ & 0x00000008) != 0)) {
+        result.price_ = price_;
+      }
+      if (((from_bitField0_ & 0x00000010) != 0)) {
         result.numShares_ = numShares_;
+      }
+      if (((from_bitField0_ & 0x00000020) != 0)) {
+        result.isBid_ = isBid_;
       }
     }
 
@@ -371,16 +510,29 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(rs.raf.pds.v5.z2.gRPC.Order other) {
       if (other == rs.raf.pds.v5.z2.gRPC.Order.getDefaultInstance()) return this;
-      if (!other.getSymbol().isEmpty()) {
-        symbol_ = other.symbol_;
+      if (!other.getOrderId().isEmpty()) {
+        orderId_ = other.orderId_;
         bitField0_ |= 0x00000001;
         onChanged();
       }
-      if (other.getPricePerShare() != 0D) {
-        setPricePerShare(other.getPricePerShare());
+      if (!other.getClientId().isEmpty()) {
+        clientId_ = other.clientId_;
+        bitField0_ |= 0x00000002;
+        onChanged();
+      }
+      if (!other.getSymbol().isEmpty()) {
+        symbol_ = other.symbol_;
+        bitField0_ |= 0x00000004;
+        onChanged();
+      }
+      if (other.getPrice() != 0D) {
+        setPrice(other.getPrice());
       }
       if (other.getNumShares() != 0) {
         setNumShares(other.getNumShares());
+      }
+      if (other.getIsBid() != false) {
+        setIsBid(other.getIsBid());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -409,20 +561,35 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              symbol_ = input.readStringRequireUtf8();
+              orderId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
             } // case 10
-            case 17: {
-              pricePerShare_ = input.readDouble();
+            case 18: {
+              clientId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000002;
               break;
-            } // case 17
-            case 24: {
-              numShares_ = input.readInt32();
+            } // case 18
+            case 26: {
+              symbol_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000004;
               break;
-            } // case 24
+            } // case 26
+            case 33: {
+              price_ = input.readDouble();
+              bitField0_ |= 0x00000008;
+              break;
+            } // case 33
+            case 40: {
+              numShares_ = input.readInt32();
+              bitField0_ |= 0x00000010;
+              break;
+            } // case 40
+            case 48: {
+              isBid_ = input.readBool();
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 48
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -440,9 +607,153 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
+    private java.lang.Object orderId_ = "";
+    /**
+     * <code>string orderId = 1;</code>
+     * @return The orderId.
+     */
+    public java.lang.String getOrderId() {
+      java.lang.Object ref = orderId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        orderId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string orderId = 1;</code>
+     * @return The bytes for orderId.
+     */
+    public com.google.protobuf.ByteString
+        getOrderIdBytes() {
+      java.lang.Object ref = orderId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        orderId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string orderId = 1;</code>
+     * @param value The orderId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setOrderId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      orderId_ = value;
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string orderId = 1;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearOrderId() {
+      orderId_ = getDefaultInstance().getOrderId();
+      bitField0_ = (bitField0_ & ~0x00000001);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string orderId = 1;</code>
+     * @param value The bytes for orderId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setOrderIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      orderId_ = value;
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object clientId_ = "";
+    /**
+     * <code>string clientId = 2;</code>
+     * @return The clientId.
+     */
+    public java.lang.String getClientId() {
+      java.lang.Object ref = clientId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        clientId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string clientId = 2;</code>
+     * @return The bytes for clientId.
+     */
+    public com.google.protobuf.ByteString
+        getClientIdBytes() {
+      java.lang.Object ref = clientId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        clientId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string clientId = 2;</code>
+     * @param value The clientId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setClientId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      clientId_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string clientId = 2;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearClientId() {
+      clientId_ = getDefaultInstance().getClientId();
+      bitField0_ = (bitField0_ & ~0x00000002);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string clientId = 2;</code>
+     * @param value The bytes for clientId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setClientIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      clientId_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+
     private java.lang.Object symbol_ = "";
     /**
-     * <code>string symbol = 1;</code>
+     * <code>string symbol = 3;</code>
      * @return The symbol.
      */
     public java.lang.String getSymbol() {
@@ -458,7 +769,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string symbol = 1;</code>
+     * <code>string symbol = 3;</code>
      * @return The bytes for symbol.
      */
     public com.google.protobuf.ByteString
@@ -475,7 +786,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string symbol = 1;</code>
+     * <code>string symbol = 3;</code>
      * @param value The symbol to set.
      * @return This builder for chaining.
      */
@@ -483,22 +794,22 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       symbol_ = value;
-      bitField0_ |= 0x00000001;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
-     * <code>string symbol = 1;</code>
+     * <code>string symbol = 3;</code>
      * @return This builder for chaining.
      */
     public Builder clearSymbol() {
       symbol_ = getDefaultInstance().getSymbol();
-      bitField0_ = (bitField0_ & ~0x00000001);
+      bitField0_ = (bitField0_ & ~0x00000004);
       onChanged();
       return this;
     }
     /**
-     * <code>string symbol = 1;</code>
+     * <code>string symbol = 3;</code>
      * @param value The bytes for symbol to set.
      * @return This builder for chaining.
      */
@@ -507,46 +818,46 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       symbol_ = value;
-      bitField0_ |= 0x00000001;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
 
-    private double pricePerShare_ ;
+    private double price_ ;
     /**
-     * <code>double pricePerShare = 2;</code>
-     * @return The pricePerShare.
+     * <code>double price = 4;</code>
+     * @return The price.
      */
     @java.lang.Override
-    public double getPricePerShare() {
-      return pricePerShare_;
+    public double getPrice() {
+      return price_;
     }
     /**
-     * <code>double pricePerShare = 2;</code>
-     * @param value The pricePerShare to set.
+     * <code>double price = 4;</code>
+     * @param value The price to set.
      * @return This builder for chaining.
      */
-    public Builder setPricePerShare(double value) {
+    public Builder setPrice(double value) {
 
-      pricePerShare_ = value;
-      bitField0_ |= 0x00000002;
+      price_ = value;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
     /**
-     * <code>double pricePerShare = 2;</code>
+     * <code>double price = 4;</code>
      * @return This builder for chaining.
      */
-    public Builder clearPricePerShare() {
-      bitField0_ = (bitField0_ & ~0x00000002);
-      pricePerShare_ = 0D;
+    public Builder clearPrice() {
+      bitField0_ = (bitField0_ & ~0x00000008);
+      price_ = 0D;
       onChanged();
       return this;
     }
 
     private int numShares_ ;
     /**
-     * <code>int32 numShares = 3;</code>
+     * <code>int32 numShares = 5;</code>
      * @return The numShares.
      */
     @java.lang.Override
@@ -554,24 +865,68 @@ private static final long serialVersionUID = 0L;
       return numShares_;
     }
     /**
-     * <code>int32 numShares = 3;</code>
+     * <code>int32 numShares = 5;</code>
      * @param value The numShares to set.
      * @return This builder for chaining.
      */
     public Builder setNumShares(int value) {
 
       numShares_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
     /**
-     * <code>int32 numShares = 3;</code>
+     * <code>int32 numShares = 5;</code>
      * @return This builder for chaining.
      */
     public Builder clearNumShares() {
-      bitField0_ = (bitField0_ & ~0x00000004);
+      bitField0_ = (bitField0_ & ~0x00000010);
       numShares_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private boolean isBid_ ;
+    /**
+     * <pre>
+     *da li je za kupovinu
+     * </pre>
+     *
+     * <code>bool isBid = 6;</code>
+     * @return The isBid.
+     */
+    @java.lang.Override
+    public boolean getIsBid() {
+      return isBid_;
+    }
+    /**
+     * <pre>
+     *da li je za kupovinu
+     * </pre>
+     *
+     * <code>bool isBid = 6;</code>
+     * @param value The isBid to set.
+     * @return This builder for chaining.
+     */
+    public Builder setIsBid(boolean value) {
+
+      isBid_ = value;
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *da li je za kupovinu
+     * </pre>
+     *
+     * <code>bool isBid = 6;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearIsBid() {
+      bitField0_ = (bitField0_ & ~0x00000020);
+      isBid_ = false;
       onChanged();
       return this;
     }

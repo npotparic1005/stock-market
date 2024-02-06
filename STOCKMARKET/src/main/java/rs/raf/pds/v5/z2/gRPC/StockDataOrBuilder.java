@@ -57,4 +57,33 @@ public interface StockDataOrBuilder extends
    * <code>.google.protobuf.Timestamp date = 5;</code>
    */
   com.google.protobuf.TimestampOrBuilder getDateOrBuilder();
+
+  /**
+   * <pre>
+   * Assuming history is a list of price changes
+   * </pre>
+   *
+   * <code>repeated double history = 6;</code>
+   * @return A list containing the history.
+   */
+  java.util.List<java.lang.Double> getHistoryList();
+  /**
+   * <pre>
+   * Assuming history is a list of price changes
+   * </pre>
+   *
+   * <code>repeated double history = 6;</code>
+   * @return The count of history.
+   */
+  int getHistoryCount();
+  /**
+   * <pre>
+   * Assuming history is a list of price changes
+   * </pre>
+   *
+   * <code>repeated double history = 6;</code>
+   * @param index The index of the element to return.
+   * @return The history at the given index.
+   */
+  double getHistory(int index);
 }
