@@ -184,7 +184,7 @@ private static final long serialVersionUID = 0L;
   private boolean isBid_ = false;
   /**
    * <pre>
-   *da li je za kupovinu
+   *da li je za kupovinu, true jeste
    * </pre>
    *
    * <code>bool isBid = 6;</code>
@@ -890,7 +890,7 @@ private static final long serialVersionUID = 0L;
     private boolean isBid_ ;
     /**
      * <pre>
-     *da li je za kupovinu
+     *da li je za kupovinu, true jeste
      * </pre>
      *
      * <code>bool isBid = 6;</code>
@@ -902,7 +902,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     *da li je za kupovinu
+     *da li je za kupovinu, true jeste
      * </pre>
      *
      * <code>bool isBid = 6;</code>
@@ -918,7 +918,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     *da li je za kupovinu
+     *da li je za kupovinu, true jeste
      * </pre>
      *
      * <code>bool isBid = 6;</code>

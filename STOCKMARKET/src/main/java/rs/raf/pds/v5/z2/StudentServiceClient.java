@@ -35,29 +35,58 @@ public class StudentServiceClient extends StudentServiceGrpc.StudentServiceImplB
 
 
 	private static Client generateClient() {
-		// Generate a unique client ID
+
 		String clientId = UUID.randomUUID().toString();
 
-		// Create stock information for the client
+
 		StockInfo stock1 = StockInfo.newBuilder()
 
-				.setSymbol("CVCO") // Set the stock symbol for the order
-				.setNumShares(100)// Set the number of shares
-				.build(); // Build the Order object
+				.setSymbol("CVCO")
+				.setNumShares(100)
+				.build();
 
 
 
 		StockInfo stock2 = StockInfo.newBuilder()
 
-				.setSymbol("MSTF") // Set the stock symbol for the order
-				.setNumShares(100)// Set the number of shares
-				.build(); // Build the Order object
+				.setSymbol("MSTF")
+				.setNumShares(100)
+				.build();
+
+		StockInfo grntStock = StockInfo.newBuilder()
+				.setSymbol("GRNT")
+				.setNumShares(100)
+				.build();
+
+		StockInfo gromStock = StockInfo.newBuilder()
+				.setSymbol("GROM")
+				.setNumShares(100)
+				.build();
+
+		StockInfo grovStock = StockInfo.newBuilder()
+				.setSymbol("GROV")
+				.setNumShares(100)
+				.build();
+
+		StockInfo growStock = StockInfo.newBuilder()
+				.setSymbol("GROW")
+				.setNumShares(100)
+				.build();
+
+		StockInfo groyStock = StockInfo.newBuilder()
+				.setSymbol("GROY")
+				.setNumShares(100)
+				.build();
 
 		Client client = Client.newBuilder()
 				.setClientId(clientId)
 				.addStocks(stock1)
 				.addStocks(stock2)
-				// Add more stocks as needed
+				.addStocks(grntStock)
+				.addStocks(gromStock)
+				.addStocks(grovStock)
+				.addStocks(growStock)
+				.addStocks(groyStock)
 				.build();
 
 
@@ -81,8 +110,7 @@ public static void main(String[] args) throws UnknownHostException, IOException 
 			.build();
 	StudentServiceClient client = new StudentServiceClient(channel);
 	registerClient(client);
-//        BerzaServiceGrpc.BerzaServiceBlockingStub blockingStub = BerzaServiceGrpc.newBlockingStub(channel);
-//        BerzaServiceGrpc.BerzaServiceStub asyncStub = BerzaServiceGrpc.newStub(channel);
+
 
 
 
@@ -173,9 +201,11 @@ public static void main(String[] args) throws UnknownHostException, IOException 
 		try {
 			OrderResponse response = blockingStub.placeOrder(order);
 			if (response.getSuccess()) {
-				System.out.println("Izvrsen trade");
-			} else {
-				System.out.println("Order placed");
+				System.out.println("Order added to pending list.");
+			} else if(response.getTransaction()) {
+				//System.out.println("Transaction executed. ");
+			}else if(response.getFailed()){
+				System.out.println("You don't have enough shares of this company.");
 			}
 		} catch (StatusRuntimeException e) {
 			System.err.println("RPC failed: " + e.getStatus());

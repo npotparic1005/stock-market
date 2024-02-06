@@ -75,6 +75,8 @@ message RegisterResponse {
 
 message OrderResponse {
 	bool success = 1;
+	bool transaction=2;
+	bool failed=3;
 }
 message SubscribeResponse {
 	bool success = 1;

@@ -57,7 +57,7 @@ public interface OrderOrBuilder extends
 
   /**
    * <pre>
-   *da li je za kupovinu
+   *da li je za kupovinu, true jeste
    * </pre>
    *
    * <code>bool isBid = 6;</code>

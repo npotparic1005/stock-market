@@ -25,6 +25,11 @@ public class StockExchangeServiceServer {
 
 	static private  ConcurrentHashMap<String, StockData> stockMap = new ConcurrentHashMap<String, StockData>();
 
+	static private final Map<String, Client> registeredClients = new ConcurrentHashMap<>();
+
+
+	static private List<Order> trades = new ArrayList<>();
+
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -53,11 +58,11 @@ public class StockExchangeServiceServer {
 
 	static class StockExchangeServiceImpl extends StockExchangeServiceImplBase {
 		int count=0;
-		private final Map<String, Socket> connections = new ConcurrentHashMap<>();
+		private static final Map<String, Socket> connections = new ConcurrentHashMap<>();
 		private final Map<String, Client> registeredClients = new ConcurrentHashMap<>();
 		//private final ConcurrentHashMap<String, StockData> stockMap = new ConcurrentHashMap<String, StockData>();
 		// private ConcurrentHashMap<String, List<String>> subscribers = new ConcurrentHashMap<>();
-		private List<Order> trades = new ArrayList<>();
+		//private List<Order> trades = new ArrayList<>();
 		private List<Order> orders=new ArrayList<>();
 
 		private List<Client> clients = new ArrayList<>();
@@ -124,76 +129,103 @@ public class StockExchangeServiceServer {
 			timer.scheduleAtFixedRate(new TimerTask() {
 				@Override
 				public void run() {
-					//System.out.println(subscribers);
-					for (Map.Entry<String, List<String>> entry : subscribers.entrySet()) {
-						String stockSymbol = entry.getKey(); // Get the stock symbol
-						//System.out.println(stockSymbol+"ovo je simbol");
 
-						List<String> subscribers2 = entry.getValue(); // Get the Set of subscribers for this stock symbol
-						//System.out.println(subscribers2+"ovo je lista");
-
-						//if(!(subscribers2.isEmpty())){
-							//System.out.println("1Stock Symbol: " + stockSymbol + " has subscribers:");
-
-						//}
-						//System.out.println("2Stock Symbol: " + stockSymbol + " has subscribers:"+subscribers);
-						for (String subscriberId : subscribers2) {
-
-							for (Map.Entry<String, StockData> c : stockMap.entrySet()) {
-
-								String output="";
-								if(c.getValue().getSymbol().equals(stockSymbol)){
-									StockData data = c.getValue();
-
-									double percentChange=0;
-									double change= data.getPriceAtStart();
-									System.out.println(data.getPriceAtStart() +"ovo je stockmap iz updates");
-
-									if(history.get(data.getSymbol()).size()>1){
-
-										Number[] nums = calculateHistory(data);
-										 percentChange= (double) nums[0];
-										 change =(double)nums[1];
-									}
-
-
-									System.out.println(percentChange+"ovde sam");
-									System.out.println(change);
-
-									String directionSymbol = change > 0 ? "↑" : (change < 0 ? "↓" : "");
-									String colorCode = change > 0 ? "\u001B[32m" : (change < 0 ? "\u001B[31m" : "\u001B[0m");
-									output+= String.format("%s%s %.2f %s%.2f%% %s\u001B[0m", // Format string
-											colorCode,
-											data.getSymbol(),
-											data.getPriceAtStart(),
-											change >= 0 ? "+" : "-",
-											percentChange,
-											directionSymbol);
-
-								}
-
-									Socket clientSocket = connections.get(subscriberId);
-
-									if (!output.isEmpty()&&clientSocket != null && !clientSocket.isClosed()) {
-										try {
-											PrintWriter writer = new PrintWriter(clientSocket.getOutputStream(), true);
-											writer.println(output);
-										} catch (IOException e) {
-											e.printStackTrace();
-										}
-									}
-
-
-							}
-
-						}
-						}
+					feed();
 
 					}
-			},0,10000);
+			},0,60000);
 			}
 
 
+		public static void feed(){
+			//System.out.println(subscribers);
+			for (Map.Entry<String, List<String>> entry : subscribers.entrySet()) {
+				String stockSymbol = entry.getKey(); // Get the stock symbol
+				//System.out.println(stockSymbol+"ovo je simbol");
+
+				List<String> subscribers2 = entry.getValue(); // Get the Set of subscribers for this stock symbol
+				//System.out.println(subscribers2+"ovo je lista");
+
+				//if(!(subscribers2.isEmpty())){
+				//System.out.println("1Stock Symbol: " + stockSymbol + " has subscribers:");
+
+				//}
+				//System.out.println("2Stock Symbol: " + stockSymbol + " has subscribers:"+subscribers);
+				for (String subscriberId : subscribers2) {
+
+					for (Map.Entry<String, StockData> c : stockMap.entrySet()) {
+
+						String output="";
+						if(c.getValue().getSymbol().equals(stockSymbol)){
+							StockData data = c.getValue();
+
+							double percentChange=0;
+							double change= data.getPriceAtStart();
+							System.out.println(data.getPriceAtStart() +"ovo je stockmap iz updates");
+							String changeString = "0% 0% 0%";
+
+							if(history.get(data.getSymbol()).size()>1){
+
+								Number[] nums = calculateHistory(data);
+								double percent1h = (double) nums[0];
+								double change1h = (double) nums[1];
+								double percent24h = (double) nums[2];
+								double change24h = (double) nums[3];
+								double percent7d = (double) nums[4];
+								double change7d = (double) nums[5];
+
+								changeString = String.format("%s%s%.2f%% %s\u001B[0m %s%s%.2f%% %s\u001B[0m %s%s%.2f%% %s\u001B[0m",
+										change1h > 0 ? "\u001B[32m" : (change1h < 0 ? "\u001B[31m" : "\u001B[0m"),
+										change1h >= 0 ? "+" : "-",
+										percent1h,
+										change1h > 0 ? "↑" : (change1h < 0 ? "↓" : ""),
+
+										change24h > 0 ? "\u001B[32m" : (change24h < 0 ? "\u001B[31m" : "\u001B[0m"),
+										change24h >= 0 ? "+" : "-",
+										percent24h,
+										change24h > 0 ? "↑" : (change24h < 0 ? "↓" : ""),
+
+										change7d > 0 ? "\u001B[32m" : (change7d < 0 ? "\u001B[31m" : "\u001B[0m"),
+										change7d >= 0 ? "+" : "-",
+										percent7d,
+										change7d > 0 ? "↑" : (change7d < 0 ? "↓" : "")
+										);
+
+								percentChange= (double) nums[0];
+								change =(double)nums[1];
+							}
+
+
+							System.out.println(percentChange+"ovde sam");
+							System.out.println(change);
+
+							String directionSymbol = change > 0 ? "↑" : (change < 0 ? "↓" : "");
+							String colorCode = change > 0 ? "\u001B[32m" : (change < 0 ? "\u001B[31m" : "\u001B[0m");
+							output+= String.format("%s %.2f %s", // Format string
+									data.getSymbol(),
+									data.getPriceAtStart(),
+									changeString);
+
+						}
+
+						Socket clientSocket = connections.get(subscriberId);
+
+						if (!output.isEmpty()&&clientSocket != null && !clientSocket.isClosed()) {
+							try {
+								PrintWriter writer = new PrintWriter(clientSocket.getOutputStream(), true);
+								writer.println(output);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}
+
+
+					}
+
+				}
+			}
+
+		}
 		public static Number[] calculateHistory(StockData data){
 			String symbol=data.getSymbol();
 			double price= data.getPriceAtStart();
@@ -254,9 +286,7 @@ public class StockExchangeServiceServer {
 		private void scheduleDoneTradesUpdate() {
 			ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
-			scheduler.scheduleAtFixedRate(() -> {
-				writeDoneTradesToFile();
-			}, 0, 10000, TimeUnit.MINUTES);
+			scheduler.scheduleAtFixedRate(this::writeDoneTradesToFile, 0, 1, TimeUnit.MINUTES);
 		}
 
 
@@ -270,12 +300,13 @@ public class StockExchangeServiceServer {
 				writer.write("Trades\n");
 				for (Order order : trades) {
 
-					String line = order.getOrderId() + "," + order.getClientId() + "," + order.getSymbol() + "," +
-							order.getNumShares() + "," + order.getPrice();
+					String line = "Order ID: "+ order.getOrderId() + "," +"OWNER ID: "+ order.getClientId() + "," +"COMPANY NAME: " +order.getSymbol() + "," +
+					"NUMBER OF SHARES: "	+	order.getNumShares() + "," +"PRICE: "+ order.getPrice();
 					writer.write(line);
 					writer.newLine();
+					System.out.println("uspesno upisano");
 				}
-				System.out.println("uspesno upisano");
+
 			} catch (IOException e) {
 				System.err.println("Error pri upisivanju: " + e.getMessage());
 			}
@@ -333,6 +364,15 @@ public class StockExchangeServiceServer {
 
 			boolean orderMatched = false;
 
+			if (!isBid && !hasEnoughShares(clientId, symbol, quantity)) {
+				//notifyClient(clientId, "Ne posedujete akcije ove kompanije, ili ne posedujete dovoljno akcija: " + symbol);
+
+				OrderResponse response = OrderResponse.newBuilder().setFailed(true).build();
+				responseObserver.onNext(response);
+				responseObserver.onCompleted();
+				return;
+			}
+
 			// suprotni order, izvrsava se
 			for (Order existingOrder : orders) {
 				if (existingOrder.getSymbol().equals(symbol)
@@ -342,8 +382,12 @@ public class StockExchangeServiceServer {
 					orderMatched = true;
 					executeTrade(existingOrder, request);
 					updateStockPrice(symbol,price);
-					System.out.println(stockMap.get("CVCO")+"ovo je samo za cvco ");
-					break;
+					feed();
+					//System.out.println(stockMap.get("CVCO")+"ovo je samo za cvco ");
+					OrderResponse response = OrderResponse.newBuilder().setTransaction(true).build();
+					responseObserver.onNext(response);
+					responseObserver.onCompleted();
+					return;
 				}
 			}
 
@@ -353,13 +397,28 @@ public class StockExchangeServiceServer {
 				orders.add(request.toBuilder().setOrderId(orderId).build());
 
 			}
-			System.out.println(orders+"ovo su sve orders iz placeorder");
+			//System.out.println(orders+"ovo su sve orders iz placeorder");
 
 			OrderResponse response = OrderResponse.newBuilder()
-					.setSuccess(orderMatched)
+					.setSuccess(true)
 					.build();
 			responseObserver.onNext(response);
 			responseObserver.onCompleted();
+		}
+
+		private boolean hasEnoughShares(String clientId, String symbol, int quantity) {
+			Client client = registeredClients.get(clientId);
+			if (client == null) {
+				return false;
+			}
+
+			for (StockInfo stockInfo : client.getStocksList()) {
+				if (stockInfo.getSymbol().equals(symbol) && stockInfo.getNumShares() >= quantity) {
+					return true;
+				}
+			}
+
+			return false;
 		}
 		private void executeTrade(Order matchedOrder, Order newOrder) {
 
@@ -389,8 +448,9 @@ public class StockExchangeServiceServer {
 		private void notifyClient(String clientId, String message) {
 			Socket clientSocket = connections.get(clientId);
 			if (clientSocket != null && !clientSocket.isClosed()) {
-				try (PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)) {
-					out.println(message);
+				try {
+					PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+					out.println(message); // Send the message
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
