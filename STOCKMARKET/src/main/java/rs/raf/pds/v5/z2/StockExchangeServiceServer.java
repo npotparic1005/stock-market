@@ -32,7 +32,6 @@ public class StockExchangeServiceServer {
 
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-
 		//private ConcurrentHashMap<String, List<String>> subscribers = new ConcurrentHashMap<>();
 
 		//StockExchangeServiceServer stockExchangeServer = new StockExchangeServiceServer();
@@ -230,32 +229,45 @@ public class StockExchangeServiceServer {
 			String symbol=data.getSymbol();
 			double price= data.getPriceAtStart();
 			System.out.println(price+"u histori");
-			double percent=0;
-			double abs=0;
-			Number[] numbers = new Number[2];
+			double percent1h=0, abs1h=0, percent24h=0, abs24h=0, percent7d=0, abs7d=0;
+			Number[] numbers = new Number[6];
 
 			Instant instant = Instant.now();
 			Timestamp t = Timestamp.newBuilder().setSeconds(instant.getEpochSecond()).build();
-			Timestamp t1h= Timestamp.newBuilder().setSeconds(t.getSeconds()-3600).build();
+			int hour = 3600;
+			int day = hour * 24;
+			int week = day * 7;
+			Timestamp t1h= Timestamp.newBuilder().setSeconds(t.getSeconds() - hour).build();
+			Timestamp t24h= Timestamp.newBuilder().setSeconds(t.getSeconds() - day).build();
+			Timestamp t7d= Timestamp.newBuilder().setSeconds(t.getSeconds() - week).build();
 			List<StockData> stockHistory = history.get(symbol);
 			for (int i = stockHistory.size() - 1; i >= 0; i--) {
 				StockData stock = stockHistory.get(i);
 					if (stock.getDate().getSeconds()>t1h.getSeconds()){
-						//percent=(price*100)/stock.getPriceAtStart();
-						//percent=100-percent;
-						// <333333333333333333333333
-						// from nikolicy with luv
-						// <33333333
-						percent = (Math.abs(price - stock.getPriceAtStart()) / price)*100;
-						abs=price-stock.getPriceAtStart();
-						System.out.println(percent+"iz histori");
-						System.out.println(abs+"iz histori");
-						System.out.println(percent);
+						percent1h = (Math.abs(price - stock.getPriceAtStart()) / (price > stock.getPriceAtStart() ? price : stock.getPriceAtStart()))*100;
+						abs1h = price-stock.getPriceAtStart();
+					}
+
+					if (stock.getDate().getSeconds()>t24h.getSeconds()){
+						percent24h = (Math.abs(price - stock.getPriceAtStart()) / (price > stock.getPriceAtStart() ? price : stock.getPriceAtStart()))*100;
+						abs24h = price-stock.getPriceAtStart();
+					}
+
+					if (stock.getDate().getSeconds()>t7d.getSeconds()){
+						percent7d = (Math.abs(price - stock.getPriceAtStart()) / (price > stock.getPriceAtStart() ? price : stock.getPriceAtStart()))*100;
+						abs7d = price-stock.getPriceAtStart();
 					}
 				}
 
-			numbers[0]=percent;
-			numbers[1]=abs;
+			numbers[0]=percent1h;
+			numbers[1]=abs1h;
+
+			numbers[2]=percent24h;
+			numbers[3]=abs24h;
+
+			numbers[4]=percent7d;
+			numbers[5]=abs7d;
+
 			return numbers;
 		}
 
@@ -280,6 +292,33 @@ public class StockExchangeServiceServer {
 				}
 			}
 
+
+			Instant instant = Instant.now();
+			Timestamp t = Timestamp.newBuilder().setSeconds(instant.getEpochSecond()).build();
+			int hour = 3600, day = hour * 24, week = day * 7;
+
+			Timestamp t24h= Timestamp.newBuilder().setSeconds(t.getSeconds() - day + 5000).build();
+			Timestamp t7d= Timestamp.newBuilder().setSeconds(t.getSeconds() - week + 5000).build();
+
+			// Simulation defaults
+			StockData cvcoSimulationTrade24h = StockData.newBuilder()
+					.setSymbol("CVCO")
+					.setCompanyName("Cvco Industries Inc.")
+					.setPriceAtStart(164.5)
+					.setPriceChange(15)
+					.setDate(t24h)
+					.build();
+
+			StockData cvcoSimulationTrade7d = StockData.newBuilder()
+					.setSymbol("CVCO")
+					.setCompanyName("Cvco Industries Inc.")
+					.setPriceAtStart(540)
+					.setPriceChange(30)
+					.setDate(t7d)
+					.build();
+
+			history.get("CVCO").add(0, cvcoSimulationTrade24h);
+			history.get("CVCO").add(0, cvcoSimulationTrade7d);
 		}
 		private static final long UPDATE_INTERVAL = 6 * 60 * 1000; // 6 minutes in milliseconds
 
