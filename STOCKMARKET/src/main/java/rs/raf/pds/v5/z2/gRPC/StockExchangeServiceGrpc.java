@@ -232,6 +232,37 @@ public final class StockExchangeServiceGrpc {
     return getPlaceOrderMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<rs.raf.pds.v5.z2.gRPC.TradesRequest,
+      rs.raf.pds.v5.z2.gRPC.OrderList> getGetTradesMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetTrades",
+      requestType = rs.raf.pds.v5.z2.gRPC.TradesRequest.class,
+      responseType = rs.raf.pds.v5.z2.gRPC.OrderList.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<rs.raf.pds.v5.z2.gRPC.TradesRequest,
+      rs.raf.pds.v5.z2.gRPC.OrderList> getGetTradesMethod() {
+    io.grpc.MethodDescriptor<rs.raf.pds.v5.z2.gRPC.TradesRequest, rs.raf.pds.v5.z2.gRPC.OrderList> getGetTradesMethod;
+    if ((getGetTradesMethod = StockExchangeServiceGrpc.getGetTradesMethod) == null) {
+      synchronized (StockExchangeServiceGrpc.class) {
+        if ((getGetTradesMethod = StockExchangeServiceGrpc.getGetTradesMethod) == null) {
+          StockExchangeServiceGrpc.getGetTradesMethod = getGetTradesMethod =
+              io.grpc.MethodDescriptor.<rs.raf.pds.v5.z2.gRPC.TradesRequest, rs.raf.pds.v5.z2.gRPC.OrderList>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetTrades"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  rs.raf.pds.v5.z2.gRPC.TradesRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  rs.raf.pds.v5.z2.gRPC.OrderList.getDefaultInstance()))
+              .setSchemaDescriptor(new StockExchangeServiceMethodDescriptorSupplier("GetTrades"))
+              .build();
+        }
+      }
+    }
+    return getGetTradesMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -328,6 +359,13 @@ public final class StockExchangeServiceGrpc {
         io.grpc.stub.StreamObserver<rs.raf.pds.v5.z2.gRPC.OrderResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getPlaceOrderMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void getTrades(rs.raf.pds.v5.z2.gRPC.TradesRequest request,
+        io.grpc.stub.StreamObserver<rs.raf.pds.v5.z2.gRPC.OrderList> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetTradesMethod(), responseObserver);
+    }
   }
 
   /**
@@ -412,6 +450,14 @@ public final class StockExchangeServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getPlaceOrderMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void getTrades(rs.raf.pds.v5.z2.gRPC.TradesRequest request,
+        io.grpc.stub.StreamObserver<rs.raf.pds.v5.z2.gRPC.OrderList> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetTradesMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -479,6 +525,13 @@ public final class StockExchangeServiceGrpc {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getPlaceOrderMethod(), getCallOptions(), request);
     }
+
+    /**
+     */
+    public rs.raf.pds.v5.z2.gRPC.OrderList getTrades(rs.raf.pds.v5.z2.gRPC.TradesRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetTradesMethod(), getCallOptions(), request);
+    }
   }
 
   /**
@@ -544,6 +597,14 @@ public final class StockExchangeServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getPlaceOrderMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<rs.raf.pds.v5.z2.gRPC.OrderList> getTrades(
+        rs.raf.pds.v5.z2.gRPC.TradesRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetTradesMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_GET_STOCK_DATA = 0;
@@ -553,6 +614,7 @@ public final class StockExchangeServiceGrpc {
   private static final int METHODID_REGISTER_CLIENT = 4;
   private static final int METHODID_ADD_SUBSCRIBER = 5;
   private static final int METHODID_PLACE_ORDER = 6;
+  private static final int METHODID_GET_TRADES = 7;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -598,6 +660,10 @@ public final class StockExchangeServiceGrpc {
         case METHODID_PLACE_ORDER:
           serviceImpl.placeOrder((rs.raf.pds.v5.z2.gRPC.Order) request,
               (io.grpc.stub.StreamObserver<rs.raf.pds.v5.z2.gRPC.OrderResponse>) responseObserver);
+          break;
+        case METHODID_GET_TRADES:
+          serviceImpl.getTrades((rs.raf.pds.v5.z2.gRPC.TradesRequest) request,
+              (io.grpc.stub.StreamObserver<rs.raf.pds.v5.z2.gRPC.OrderList>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -666,6 +732,13 @@ public final class StockExchangeServiceGrpc {
               rs.raf.pds.v5.z2.gRPC.Order,
               rs.raf.pds.v5.z2.gRPC.OrderResponse>(
                 service, METHODID_PLACE_ORDER)))
+        .addMethod(
+          getGetTradesMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              rs.raf.pds.v5.z2.gRPC.TradesRequest,
+              rs.raf.pds.v5.z2.gRPC.OrderList>(
+                service, METHODID_GET_TRADES)))
         .build();
   }
 
@@ -721,6 +794,7 @@ public final class StockExchangeServiceGrpc {
               .addMethod(getRegisterClientMethod())
               .addMethod(getAddSubscriberMethod())
               .addMethod(getPlaceOrderMethod())
+              .addMethod(getGetTradesMethod())
               .build();
         }
       }

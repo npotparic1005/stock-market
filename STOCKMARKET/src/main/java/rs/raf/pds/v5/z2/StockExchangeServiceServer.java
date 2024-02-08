@@ -10,6 +10,7 @@ import rs.raf.pds.v5.z2.gRPC.StockExchangeServiceGrpc.StockExchangeServiceImplBa
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -27,8 +28,11 @@ public class StockExchangeServiceServer {
 
 	static private final Map<String, Client> registeredClients = new ConcurrentHashMap<>();
 
+	static private ConcurrentHashMap<Timestamp, List<Order>> trades = new ConcurrentHashMap<>();
 
-	static private List<Order> trades = new ArrayList<>();
+
+
+	//static private List<Order> trades = new ArrayList<>();
 
 
 	public static void main(String[] args) throws IOException, InterruptedException {
@@ -160,7 +164,7 @@ public class StockExchangeServiceServer {
 
 							double percentChange=0;
 							double change= data.getPriceAtStart();
-							System.out.println(data.getPriceAtStart() +"ovo je stockmap iz updates");
+							//System.out.println(data.getPriceAtStart() +"ovo je stockmap iz updates");
 							String changeString = "0% 0% 0%";
 
 							if(history.get(data.getSymbol()).size()>1){
@@ -228,7 +232,7 @@ public class StockExchangeServiceServer {
 		public static Number[] calculateHistory(StockData data){
 			String symbol=data.getSymbol();
 			double price= data.getPriceAtStart();
-			System.out.println(price+"u histori");
+			//System.out.println(price+"u histori");
 			double percent1h=0, abs1h=0, percent24h=0, abs24h=0, percent7d=0, abs7d=0;
 			Number[] numbers = new Number[6];
 
@@ -337,19 +341,59 @@ public class StockExchangeServiceServer {
 					file.delete();
 				}
 				writer.write("Trades\n");
-				for (Order order : trades) {
+				for (Map.Entry<Timestamp, List<Order>> entry : trades.entrySet()) {
+					Timestamp timestamp = entry.getKey();  // This is the timestamp key in your map
+					List<Order> ordersList = entry.getValue();  // This is the list of orders associated with the timestamp
 
-					String line = "Order ID: "+ order.getOrderId() + "," +"OWNER ID: "+ order.getClientId() + "," +"COMPANY NAME: " +order.getSymbol() + "," +
-					"NUMBER OF SHARES: "	+	order.getNumShares() + "," +"PRICE: "+ order.getPrice();
-					writer.write(line);
-					writer.newLine();
-					System.out.println("uspesno upisano");
+					Date date = new Date(timestamp.getSeconds() * 1000L);
+
+					for (Order order : ordersList) {
+						String line = String.format("DATE: %s, Order ID: %s, OWNER ID: %s, COMPANY NAME: %s, NUMBER OF SHARES: %d, PRICE: %.2f",
+								date,
+								order.getOrderId(),
+								order.getClientId(),
+								order.getSymbol(),
+								order.getNumShares(),
+								order.getPrice());
+
+						writer.write(line);
+						writer.newLine();
+						System.out.println("Successfully written");
+					}
 				}
 
 			} catch (IOException e) {
 				System.err.println("Error pri upisivanju: " + e.getMessage());
 			}
 		}
+		public void getTrades(TradesRequest request, StreamObserver<OrderList> responseObserver) {
+
+			String s = request.getS();
+
+			List<Order> matched=new ArrayList<>();
+
+
+			for (Map.Entry<Timestamp, List<Order>> c : trades.entrySet()) {
+				Timestamp t2=c.getKey();
+				Date date2=new Date(t2.getSeconds()*1000);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				//String strDate1 = sdf.format(s);
+				String strDate2 = sdf.format(date2);
+				if (s.equals(strDate2)) {
+					System.out.println("The dates are equal.");
+					matched.addAll(c.getValue());
+					System.out.println(matched);
+
+				}
+			}
+				System.out.println(matched);
+
+			OrderList response = OrderList.newBuilder().addAllOffers(matched).build();
+
+			responseObserver.onNext(response);
+			responseObserver.onCompleted();
+
+	}
 		@Override
 		public void getAllStockData(EmptyMessage request, StreamObserver<StockData> responseObserver) {
 			System.out.println(stockMap.values());
@@ -475,14 +519,25 @@ public class StockExchangeServiceServer {
 
 			// sklanjanje ordera iz liste pending ordera , smestanje u listu izvrsenih ordera
 			orders.remove(matchedOrder);
-			trades.add(matchedOrder);
-
+			Instant instant = Instant.now();
+			Timestamp t = Timestamp.newBuilder().setSeconds(instant.getEpochSecond()).build();
+			addOrderToTrades(t,matchedOrder);
 
 			// Notify
 			notifyClient(buyerId, "Your order to buy " + matchedOrder.getNumShares() + " shares of " + matchedOrder.getSymbol() + " at " + matchedOrder.getPrice() + " each has been executed.");
 			notifyClient(sellerId, "Your order to sell " + matchedOrder.getNumShares() + " shares of " + matchedOrder.getSymbol() + " at " + matchedOrder.getPrice() + " each has been executed.");
 
 
+		}
+
+		public static void addOrderToTrades(Timestamp timestamp, Order order) {
+			trades.compute(timestamp, (key, orderList) -> {
+				if (orderList == null) {
+					orderList = new ArrayList<>();
+				}
+				orderList.add(order);
+				return orderList;
+			});
 		}
 		private void notifyClient(String clientId, String message) {
 			Socket clientSocket = connections.get(clientId);
@@ -542,7 +597,7 @@ public class StockExchangeServiceServer {
 		}
 		private void updateClientAssets(String clientId, String symbol, int quantity, boolean isBuy) {
 
-			System.out.println(registeredClients+"ovo je registeredclients iz updateassets");
+			//System.out.println(registeredClients+"ovo je registeredclients iz updateassets");
 			Client client=registeredClients.get(clientId);
 			List<StockInfo> updatedStocks = new ArrayList<>(client.getStocksList());
 			for (int i = 0; i < updatedStocks.size(); i++) {
@@ -566,7 +621,7 @@ public class StockExchangeServiceServer {
 
 			registeredClients.put(clientId, updatedClient);
 
-			System.out.println(registeredClients+"ovo je registeredclients iz updateassets ali nakon promene ");
+			//System.out.println(registeredClients+"ovo je registeredclients iz updateassets ali nakon promene ");
 
 
 		}
@@ -585,8 +640,8 @@ public class StockExchangeServiceServer {
 
 				stockMap.put(symbol, updatedStockData);
 				history.get(symbol).add(updatedStockData);
-				System.out.println(stockMap +"ovo je stockmap iz update stock price");
-				System.out.println(history.get("CVCO") +"ovo je history iz update stock price");
+				//System.out.println(stockMap +"ovo je stockmap iz update stock price");
+				//System.out.println(history.get("CVCO") +"ovo je history iz update stock price");
 
 
 

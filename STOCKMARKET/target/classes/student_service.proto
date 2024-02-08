@@ -15,6 +15,7 @@ service StockExchangeService {
 	rpc RegisterClient(Client) returns (RegisterResponse);
 	rpc AddSubscriber(SubscriptionRequest) returns (SubscribeResponse);
 	rpc PlaceOrder(Order) returns (OrderResponse);
+	rpc GetTrades(TradesRequest)returns(OrderList);
 }
 
 message StockRequest {
@@ -85,4 +86,6 @@ message SubscribeResponse {
 message OrderList {
 	repeated Order offers = 1;
 }
-
+message TradesRequest{
+	string s=1;
+}

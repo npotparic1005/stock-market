@@ -231,6 +231,26 @@ public static void main(String[] args) throws UnknownHostException, IOException 
 		}
 	}
 
+	public void getTradesForDate(String dateStr,StockExchangeServiceGrpc.StockExchangeServiceBlockingStub blockingStub) {
+		TradesRequest request = TradesRequest.newBuilder()
+				.setS(dateStr)
+				.build();
+
+		OrderList response = blockingStub.getTrades(request);
+
+		try{
+			for (Order order : response.getOffersList()) {
+				System.out.println("Client ID: " + order.getClientId() +
+						", Symbol: " + order.getSymbol() +
+						", Price: " + order.getPrice() +
+						", Quantity: " + order.getNumShares());
+			}
+		}catch (StatusRuntimeException e) {
+			System.err.println("RPC failed: " + e.getStatus());
+		}
+
+	}
+
 
 	public void getBidOffers(String symbol, int limit, StockExchangeServiceGrpc.StockExchangeServiceBlockingStub blockingStub) {
 		BidRequest request = BidRequest.newBuilder()
@@ -309,6 +329,14 @@ public static void main(String[] args) throws UnknownHostException, IOException 
 						grpcClient.subscribeToStocks(symbols, grpcClient.client.getClientId(), blockingStub);
 					} else {
 						System.out.println("Invalid SUBSCRIBE command format.");
+					}
+					break;
+				case "GETTRADES":
+					if (parts.length == 2) {  // Expecting the command to be in the format: GETTRADES yyyy-MM-dd
+						String dateStr = parts[1];  // The date part of the command
+						grpcClient.getTradesForDate(dateStr, blockingStub);
+					} else {
+						System.out.println("Invalid GETTRADES command format. Expected format: GETTRADES yyyy-MM-dd");
 					}
 					break;
 

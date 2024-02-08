@@ -3,3 +3,5 @@ protoc --plugin=protoc-gen-grpc-java=C:\Users\mik\Downloads\protoc-22.2-win64\bi
 .\protoc-22.2-win64\bin\protoc.exe --plugin=protoc-gen-grpc-java=.\protoc-22.2-win64\protoc-gen-grpc-java-1.54.0-windows-x86_64.exe --java_out=src\main\java --grpc-java_out=src\main\java --proto_path=src\main\resources student_service.proto
 
 hello <3 :))
+
+SUBSCRIBE CVCO GRNT GROM GROV GROY GROW

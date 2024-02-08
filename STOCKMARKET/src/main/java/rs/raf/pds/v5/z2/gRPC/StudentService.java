@@ -79,6 +79,11 @@ public final class StudentService {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_OrderList_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_TradesRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_TradesRequest_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -108,16 +113,18 @@ public final class StudentService {
       "ess\030\001 \001(\010\022\023\n\013transaction\030\002 \001(\010\022\016\n\006failed" +
       "\030\003 \001(\010\"$\n\021SubscribeResponse\022\017\n\007success\030\001" +
       " \001(\010\"#\n\tOrderList\022\026\n\006offers\030\001 \003(\0132\006.Orde" +
-      "r2\324\002\n\024StockExchangeService\022+\n\014GetStockDa" +
-      "ta\022\r.StockRequest\032\n.StockData\"\000\022.\n\017GetAl" +
-      "lStockData\022\r.EmptyMessage\032\n.StockData0\001\022" +
-      "\'\n\014GetAskOffers\022\013.AskRequest\032\n.OrderList" +
-      "\022\'\n\014GetBidOffers\022\013.BidRequest\032\n.OrderLis" +
-      "t\022,\n\016RegisterClient\022\007.Client\032\021.RegisterR" +
-      "esponse\0229\n\rAddSubscriber\022\024.SubscriptionR" +
-      "equest\032\022.SubscribeResponse\022$\n\nPlaceOrder" +
-      "\022\006.Order\032\016.OrderResponseB\031\n\025rs.raf.pds.v" +
-      "5.z2.gRPCP\001b\006proto3"
+      "r\"\032\n\rTradesRequest\022\t\n\001s\030\001 \001(\t2\375\002\n\024StockE" +
+      "xchangeService\022+\n\014GetStockData\022\r.StockRe" +
+      "quest\032\n.StockData\"\000\022.\n\017GetAllStockData\022\r" +
+      ".EmptyMessage\032\n.StockData0\001\022\'\n\014GetAskOff" +
+      "ers\022\013.AskRequest\032\n.OrderList\022\'\n\014GetBidOf" +
+      "fers\022\013.BidRequest\032\n.OrderList\022,\n\016Registe" +
+      "rClient\022\007.Client\032\021.RegisterResponse\0229\n\rA" +
+      "ddSubscriber\022\024.SubscriptionRequest\032\022.Sub" +
+      "scribeResponse\022$\n\nPlaceOrder\022\006.Order\032\016.O" +
+      "rderResponse\022\'\n\tGetTrades\022\016.TradesReques" +
+      "t\032\n.OrderListB\031\n\025rs.raf.pds.v5.z2.gRPCP\001" +
+      "b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -202,6 +209,12 @@ public final class StudentService {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_OrderList_descriptor,
         new java.lang.String[] { "Offers", });
+    internal_static_TradesRequest_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_TradesRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_TradesRequest_descriptor,
+        new java.lang.String[] { "S", });
     com.google.protobuf.TimestampProto.getDescriptor();
   }
 
